@@ -284,8 +284,8 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 <div class="info-bar">
   <div class="info-bar-inner">
     <span class="info-item"><i class="fas fa-map-pin"></i> Barrie, Ontario</span>
-    <span class="info-item"><i class="fas fa-phone"></i> <strong>Call us:</strong> (705) 796-....</span>
-    <span class="info-item"><i class="fas fa-clock"></i> <strong>Open:</strong> Mon-Sat 9AM-7PM</span>
+    <span class="info-item"><i class="fas fa-phone"></i> <strong>Call us:</strong> (705) 796-.... <span style="font-size:11px;color:var(--text-light)">(full number in storefront photo)</span></span>
+    <span class="info-item"><i class="fas fa-clock"></i> <strong>Open:</strong> Mon-Fri 10AM-8PM · Sat 10AM-6PM</span>
     <span class="info-item"><i class="fas fa-truck"></i> <strong>Delivery &amp; Pickup Available</strong></span>
   </div>
 </div>
@@ -415,7 +415,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
         </div>
         <div class="contact-detail">
           <i class="fas fa-clock"></i>
-          <div><strong>Hours</strong><p>Mon-Sat: 9AM - 7PM • Sunday: Closed</p></div>
+          <div><strong>Hours</strong><p>Mon-Fri: 10AM-8PM · Sat: 10AM-6PM · Sun: Closed</p></div>
         </div>
         <div class="contact-detail">
           <i class="fas fa-instagram"></i>
@@ -500,7 +500,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
     </div>
     <div><h4>Quick Links</h4><a href="#categories">Shop Categories</a><a href="#products">Products</a><a href="#about">About Us</a><a href="#contact">Contact</a></div>
     <div><h4>Shop</h4><a href="#categories">Fresh Produce</a><a href="#categories">Spices &amp; Seasonings</a><a href="#categories">Frozen Fish &amp; Meat</a><a href="#categories">Rice &amp; Grains</a><a href="#categories">Bakery &amp; Snacks</a><a href="#categories">Beverages</a></div>
-    <div><h4>Contact</h4><p>Barrie, Ontario</p><p>(705) 796-....</p><p>Mon-Sat: 9AM-7PM</p><p style="margin-top:12px"><a href="https://www.instagram.com/shopfest_inc/" target="_blank" style="display:inline"><i class="fab fa-instagram"></i> @shopfest_inc</a></p></div>
+    <div><h4>Contact</h4><p>Barrie, Ontario</p><p>(705) 796-....</p><p>Mon-Fri: 10AM-8PM | Sat: 10AM-6PM</p><p style="margin-top:12px"><a href="https://www.instagram.com/shopfest_inc/" target="_blank" style="display:inline"><i class="fab fa-instagram"></i> @shopfest_inc</a></p></div>
   </div>
   <div class="footer-bottom"><p>&copy; 2026 Eden African &amp; Caribbean Groceries. All rights reserved. | Barrie, Ontario</p></div>
 </footer>
@@ -662,7 +662,6 @@ function renderCategories(){
     {name:'Bakery & Snacks',icon:'fa-bread-slice',count:'25+'},
     {name:'Beverages',icon:'fa-wine-bottle',count:'40+'},
     {name:'Cooking Ingredients',icon:'fa-oil-can',count:'60+'},
-    {name:'Dairy & Chilled',icon:'fa-cheese',count:'20+'},
   ];
   const grid=document.getElementById('categoriesGrid');
   grid.innerHTML=cats.map(c=>`
@@ -691,15 +690,31 @@ function closeCheckout(){document.getElementById('checkoutModal').classList.remo
 function submitOrder(e){
   e.preventDefault();
   const name=document.getElementById('orderName').value,phone=document.getElementById('orderPhone').value,email=document.getElementById('orderEmail').value,method=document.getElementById('orderMethod').value,address=document.getElementById('orderAddress').value,notes=document.getElementById('orderNotes').value;
-  let order=`=== NEW ORDER - Eden Groceries ===\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nMethod: ${method}\n${address?'Address: '+address+'\n':''}Notes: ${notes||'none'}\n\n--- ITEMS ---\n`;
-  let total=0;cart.forEach(item=>{const t=item.price*item.qty;total+=t;order+=`${item.qty}x ${item.name} @ $${item.price.toFixed(2)} = $${t.toFixed(2)}\n`});
-  order+=`\nTOTAL: $${total.toFixed(2)}\n==================`;
-  const subject=encodeURIComponent(`New Order from ${name} — Eden Groceries`);
-  const body=encodeURIComponent(order);
-  cart=[];saveCart();closeCheckout();
-  alert(`Thank you, ${name}! Your order has been received.\n\nWe'll call you at ${phone} to confirm availability and arrange ${method}.`);
-  window.open(`mailto:${BUSINESS.email}?subject=${subject}&body=${body}`,'_blank');
-  ['orderName','orderPhone','orderEmail','orderAddress','orderNotes'].forEach(id=>document.getElementById(id).value='');
+  const items=cart.map(i=>({name:i.name,qty:i.qty,price:i.price,unit:i.unit}));
+  const total=items.reduce((s,i)=>s+i.price*i.qty,0);
+  const order={customer:{name,phone,email,address},items,total,method,notes};
+  
+  const btn=document.querySelector('.submit-order');
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  
+  fetch('https://eden-groceries-backend.178.156.135.237.nip.io/api/order',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)
+  }).then(r=>r.json()).then(data=>{
+    cart=[];saveCart();closeCheckout();
+    alert(`✅ Order #${data.orderId} received!\n\nThank you, ${name}! We'll call you at ${phone} to confirm availability and arrange ${method}.`);
+    document.getElementById('orderName').value='';document.getElementById('orderPhone').value='';
+    document.getElementById('orderEmail').value='';document.getElementById('orderAddress').value='';
+    document.getElementById('orderNotes').value='';
+  }).catch(()=>{
+    // Fallback: open email client
+    let orderText=`NEW ORDER - Eden Groceries\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nMethod: ${method}\n${address?'Address: '+address+'\n':''}Notes: ${notes||'none'}\n\nITEMS:\n`;
+    items.forEach(i=>orderText+=`${i.qty}x ${i.name} @ $${i.price.toFixed(2)} = $${(i.price*i.qty).toFixed(2)}\n`);
+    orderText+=`\nTOTAL: $${total.toFixed(2)}`;
+    const s=encodeURIComponent(`New Order from ${name} — Eden Groceries`),b=encodeURIComponent(orderText);
+    cart=[];saveCart();closeCheckout();
+    alert(`Thank you, ${name}! We'll call you at ${phone} to confirm.\n\n(Backend not reachable — order copied to email draft.)`);
+    window.open(`mailto:shopfestinc@gmail.com?subject=${s}&body=${b}`,'_blank');
+  }).finally(()=>{btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Order'});
 }
 function sendMessage(e){
   e.preventDefault();
