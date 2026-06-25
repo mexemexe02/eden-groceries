@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eden African & Caribbean Groceries — Barrie, ON</title>
+<meta name="description" content="Eden African & Caribbean Groceries in Barrie, Ontario. Fresh produce, spices, frozen fish, rice, bakery items, beverages, and more. Order online for pickup or delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green-900:#0a3d2b;--green-800:#0f5a3e;--green-700:#167a54;--green-600:#1e9b6a;
+  --green-500:#28b87f;--green-400:#5cd3a2;--green-300:#8fe6c2;--green-200:#bcf5de;
+  --green-50:#e6faf1;--gold:#d4a843;--gold-light:#f0d68a;--cream:#faf6ef;
+  --dark:#1a1a2e;--text:#2d3436;--text-light:#636e72;--white:#fff;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);--shadow-lg:0 12px 40px rgba(0,0,0,0.12);
+  --radius:12px;--radius-lg:20px;--header-h:80px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden}
+
+/* ── HEADER ── */
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--white);z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.06);transition:transform .3s}
+.header-inner{max-width:1400px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.header-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--green-700),var(--green-500));border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative}
+.logo-icon span{color:var(--white);font-size:20px;font-weight:700;font-family:'Playfair Display',serif}
+.logo-icon .crown{position:absolute;top:-8px;right:-6px;font-size:12px;color:var(--gold)}
+.header-logo-text h1{font-family:'Playfair Display',serif;font-size:20px;color:var(--green-800);line-height:1.2}
+.header-logo-text p{font-size:11px;color:var(--text-light);letter-spacing:0.5px}
+.header-nav{display:flex;align-items:center;gap:24px}
+.header-nav a{text-decoration:none;color:var(--text);font-size:14px;font-weight:500;transition:color .2s;position:relative}
+.header-nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--green-600);transition:width .2s}
+.header-nav a:hover{color:var(--green-700)}.header-nav a:hover::after{width:100%}
+.cart-btn{position:relative;background:none;border:none;font-size:20px;color:var(--green-700);cursor:pointer;padding:8px}
+.cart-count{position:absolute;top:-2px;right:-4px;background:var(--gold);color:var(--white);font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.mobile-toggle{display:none;background:none;border:none;font-size:24px;color:var(--green-700);cursor:pointer;padding:4px}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;margin-top:var(--header-h);overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--green-900)0%,var(--green-800)50%,#1a3e2e 100%)}
+.hero-bg::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&q=80')center/cover;opacity:.08}
+.hero-pattern{position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,var(--gold)0%,transparent 50%),radial-gradient(circle at 80% 30%,var(--green-400)0%,transparent 40%);opacity:.1}
+.hero-content{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-text .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);padding:8px 20px;border-radius:50px;color:var(--gold-light);font-size:13px;font-weight:500;margin-bottom:24px}
+.hero-text .badge .dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);color:var(--white);line-height:1.15;margin-bottom:20px}
+.hero-text h1 span{color:var(--gold)}
+.hero-text p{font-size:clamp(1rem,1.5vw,1.2rem);color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:36px;max-width:540px}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border-radius:50px;font-size:15px;font-weight:600;text-decoration:none;transition:all .3s;cursor:pointer;border:none}
+.btn-primary{background:var(--gold);color:var(--green-900)}.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,168,67,0.3)}
+.btn-outline-light{background:transparent;border:2px solid rgba(255,255,255,0.3);color:var(--white)}.btn-outline-light:hover{background:rgba(255,255,255,0.1);border-color:var(--gold);transform:translateY(-2px)}
+.btn-green{background:var(--green-600);color:var(--white)}.btn-green:hover{background:var(--green-500);transform:translateY(-2px);box-shadow:0 8px 30px rgba(30,155,106,0.3)}
+.hero-image{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-image img{max-width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg)}
+.hero-showcase{position:relative}
+.hero-showcase-main{width:100%;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/3;object-fit:cover}
+.hero-floating{position:absolute;background:var(--white);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;animation:float 6s ease-in-out infinite}
+.hero-floating:nth-child(2){bottom:40px;left:-20px;animation-delay:-2s}
+.hero-floating:nth-child(3){top:40px;right:-20px;animation-delay:-4s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-floating-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.hero-floating-text strong{display:block;font-size:14px;color:var(--text)}.hero-floating-text span{font-size:11px;color:var(--text-light)}
+
+/* ── SECTIONS ── */
+.section{padding:80px 24px}
+.section-dark{background:var(--green-900);color:var(--white)}
+.section-light{background:var(--white)}
+.section-cream{background:var(--cream)}
+.container{max-width:1400px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:56px}
+.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:12px;color:var(--green-800)}
+.section-dark .section-header h2{color:var(--white)}
+.section-header h2 span{color:var(--gold)}
+.section-header p{color:var(--text-light);font-size:1.05rem;max-width:600px;margin:0 auto}
+.section-dark .section-header p{color:rgba(255,255,255,0.7)}
+
+/* ── CATEGORIES ── */
+.categories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.category-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);transition:all .4s;cursor:pointer;position:relative}
+.category-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.category-card img{width:100%;height:220px;object-fit:cover;transition:transform .5s}
+.category-card:hover img{transform:scale(1.08)}
+.category-card-body{padding:20px 24px 24px}
+.category-card-body h3{font-size:18px;color:var(--green-800);margin-bottom:6px}
+.category-card-body p{font-size:13px;color:var(--text-light);margin-bottom:12px}
+.category-count{display:inline-block;font-size:12px;color:var(--green-600);font-weight:500}
+
+/* ── PRODUCT CARDS ── */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.product-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all .3s;position:relative}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.product-card .badge-seller{position:absolute;top:10px;left:10px;z-index:2;background:var(--gold);color:var(--white);font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px}
+.product-card img{width:100%;height:200px;object-fit:cover;transition:transform .4s}
+.product-card:hover img{transform:scale(1.05)}
+.product-info{padding:16px 18px 20px}
+.product-info h4{font-size:14px;color:var(--text);margin-bottom:4px}
+.product-info .origin{font-size:11px;color:var(--text-light);margin-bottom:8px}
+.product-info .price{font-size:16px;font-weight:600;color:var(--green-700);margin-bottom:12px}
+.product-info .price .unit{font-size:11px;font-weight:400;color:var(--text-light)}
+.add-to-cart{width:100%;padding:10px;background:var(--green-50);border:1px solid var(--green-200);border-radius:8px;color:var(--green-700);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.add-to-cart:hover{background:var(--green-600);color:var(--white);border-color:var(--green-600)}
+
+/* ── STORE INFO BAR ── */
+.info-bar{background:var(--white);border-bottom:1px solid rgba(0,0,0,0.06)}
+.info-bar-inner{max-width:1400px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.info-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-light)}
+.info-item i{color:var(--green-600);font-size:14px}
+.info-item strong{color:var(--text)}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-image{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);width:100%;aspect-ratio:4/3;object-fit:cover}
+.about-text h3{font-family:'Playfair Display',serif;font-size:2rem;color:var(--white);margin-bottom:20px}
+.about-text h3 span{color:var(--gold)}
+.about-text p{color:rgba(255,255,255,0.75);line-height:1.8;margin-bottom:16px;font-size:0.95rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.stat-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:20px;text-align:center}
+.stat-card .num{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);font-weight:700}
+.stat-card .label{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px}
+
+/* ── TESTIMONIALS ── */
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.testimonial-card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);position:relative}
+.testimonial-card .quote{position:absolute;top:16px;right:20px;font-size:48px;color:var(--green-200);font-family:Georgia,serif;line-height:1}
+.testimonial-card p{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:16px;position:relative}
+.testimonial-card .author{font-weight:600;font-size:13px;color:var(--green-700)}
+.testimonial-card .author span{font-weight:400;color:var(--text-light);font-size:12px}
+.testimonial-card .stars{color:var(--gold);margin-bottom:12px;font-size:14px}
+
+/* ── CART SIDEBAR ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.active{opacity:1;pointer-events:auto}
+.cart-sidebar{position:fixed;top:0;right:0;width:420px;max-width:95vw;height:100vh;background:var(--white);z-index:2001;transform:translateX(100%);transition:transform .3s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column}
+.cart-sidebar.active{transform:translateX(0)}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #eee}
+.cart-header h3{font-size:18px;color:var(--text)}
+.cart-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-light);padding:4px}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f5f5f5}
+.cart-item-img{width:60px;height:60px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.cart-item-info{flex:1}
+.cart-item-info h4{font-size:13px;color:var(--text)}.cart-item-info .price{font-size:12px;color:var(--green-700);font-weight:500}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cart-item-qty button{width:24px;height:24px;border-radius:50%;border:1px solid #ddd;background:var(--white);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center}
+.cart-item-qty span{font-size:13px;font-weight:500;width:20px;text-align:center}
+.cart-item-remove{color:#e74c3c;font-size:12px;cursor:pointer;background:none;border:none;padding:4px}
+.cart-footer{padding:20px 24px;border-top:1px solid #eee}
+.cart-total{display:flex;justify-content:space-between;font-size:16px;font-weight:600;margin-bottom:16px;color:var(--text)}
+.cart-checkout{width:100%;padding:14px;background:var(--green-600);color:var(--white);border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.cart-checkout:hover{background:var(--green-700)}
+.cart-empty{text-align:center;padding:40px 20px;color:var(--text-light)}
+.cart-empty i{font-size:48px;color:var(--green-200);margin-bottom:16px;display:block}
+
+/* ── ORDER MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2100;opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal{background:var(--white);border-radius:var(--radius-lg);padding:40px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;transform:scale(.95);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.modal-overlay.active .modal{transform:scale(1)}
+.modal h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--green-800);margin-bottom:8px;text-align:center}
+.modal>p{text-align:center;color:var(--text-light);font-size:14px;margin-bottom:28px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;transition:border-color .2s;background:var(--white)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--green-600);box-shadow:0 0 0 3px rgba(30,155,106,0.1)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.order-summary{background:var(--green-50);border-radius:var(--radius);padding:16px;margin-bottom:20px}
+.order-summary h4{font-size:14px;color:var(--green-800);margin-bottom:10px}
+.order-summary-item{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--text)}
+.order-summary-total{display:flex;justify-content:space-between;font-size:15px;font-weight:600;padding-top:8px;margin-top:8px;border-top:1px solid var(--green-200);color:var(--green-800)}
+.submit-order{width:100%;padding:14px;background:var(--green-600);color:var(--white);border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.submit-order:hover{background:var(--green-700);transform:translateY(-2px)}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-light)}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.contact-info-card{background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow)}
+.contact-info-card h3{font-size:18px;color:var(--green-800);margin-bottom:20px}
+.contact-detail{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start}
+.contact-detail i{width:40px;height:40px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;color:var(--green-600);font-size:16px;flex-shrink:0}
+.contact-detail div strong{display:block;font-size:14px;color:var(--text);margin-bottom:2px}
+.contact-detail div p{font-size:13px;color:var(--text-light)}
+.social-links{display:flex;gap:12px;margin-top:20px}
+.social-links a{width:44px;height:44px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;color:var(--green-600);font-size:18px;text-decoration:none;transition:all .2s}
+.social-links a:hover{background:var(--green-600);color:var(--white)}
+
+/* ── FOOTER ── */
+.footer{background:var(--green-900);padding:60px 24px 30px}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer h4{color:var(--white);font-size:15px;margin-bottom:16px;font-weight:600}
+.footer a{display:block;color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;margin-bottom:10px;transition:color .2s}
+.footer a:hover{color:var(--gold)}
+.footer p{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.7}
+.footer-brand .logo-icon{margin-bottom:12px}
+.footer-bottom{max-width:1400px;margin:40px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;font-size:12px;color:rgba(255,255,255,0.4)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-content{grid-template-columns:1fr;gap:40px;text-align:center}.hero-text p{margin:0 auto 36px}
+  .hero-buttons{justify-content:center}.about-grid{grid-template-columns:1fr;gap:40px}
+  .contact-grid{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .header-nav{gap:16px}.header-nav a{font-size:12px}
+  .mobile-toggle{display:block}
+  .header-nav{position:fixed;top:var(--header-h);left:0;right:0;background:var(--white);flex-direction:column;padding:20px;box-shadow:var(--shadow-lg);transform:translateY(-100%);opacity:0;pointer-events:none;transition:all .3s;gap:16px}
+  .header-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .hero{min-height:auto;padding:40px 0 60px}
+  .hero-floating{display:none}
+  .section{padding:60px 16px}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+  .categories-grid{grid-template-columns:1fr 1fr}
+  .about-stats{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr;gap:30px}
+  .info-bar-inner{gap:14px;flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+  .products-grid{grid-template-columns:1fr}
+  .categories-grid{grid-template-columns:1fr}
+  .hero-text h1{font-size:1.8rem}
+  .hero-buttons{flex-direction:column;align-items:stretch;gap:12px}
+  .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="header-logo">
+      <div class="logo-icon">
+        <span>E</span>
+        <span class="crown">👑</span>
+      </div>
+      <div class="header-logo-text">
+        <h1>Eden Groceries</h1>
+        <p>African &amp; Caribbean</p>
+      </div>
+    </a>
+    <button class="mobile-toggle" onclick="document.querySelector('.header-nav').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+    <nav class="header-nav" id="nav">
+      <a href="#categories">Shop</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <button class="cart-btn" onclick="toggleCart()">
+        <i class="fas fa-shopping-basket"></i>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-bar-inner">
+    <span class="info-item"><i class="fas fa-map-pin"></i> Barrie, Ontario</span>
+    <span class="info-item"><i class="fas fa-phone"></i> <strong>Call us:</strong> (705) 796-....</span>
+    <span class="info-item"><i class="fas fa-clock"></i> <strong>Open:</strong> Mon-Sat 9AM-7PM</span>
+    <span class="info-item"><i class="fas fa-truck"></i> <strong>Delivery &amp; Pickup Available</strong></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="badge"><span class="dot"></span> Open Today — Order Online</div>
+      <h1>Your <span>African &amp; Caribbean</span> Grocery Destination</h1>
+      <p>Fresh produce, authentic spices, frozen fish, rice &amp; grains, bakery treats, and beverages — all the tastes of home, now available in Barrie. Order online for same-day pickup or delivery.</p>
+      <div class="hero-buttons">
+        <a href="#products" class="btn btn-primary"><i class="fas fa-bag-shopping"></i> Shop Now</a>
+        <a href="#about" class="btn btn-outline-light"><i class="fas fa-store"></i> Our Story</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-showcase">
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80" alt="Fresh groceries" class="hero-showcase-main">
+        <div class="hero-floating" style="bottom:40px;left:-20px">
+          <div class="hero-floating-icon" style="background:var(--green-100, #e6faf1);color:var(--green-600)"><i class="fas fa-leaf"></i></div>
+          <div class="hero-floating-text"><strong>Fresh Produce</strong><span>Daily arrivals</span></div>
+        </div>
+        <div class="hero-floating" style="top:40px;right:-20px">
+          <div class="hero-floating-icon" style="background:#fef3c7;color:#d97706"><i class="fas fa-pepper-hot"></i></div>
+          <div class="hero-floating-text"><strong>Authentic Spices</strong><span>From the Caribbean</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <h2>Shop by <span>Category</span></h2>
+      <p>Explore our wide selection of African and Caribbean groceries, curated for authentic taste.</p>
+    </div>
+    <div class="categories-grid" id="categoriesGrid"></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section section-light" id="products">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our <span>Products</span></h2>
+      <p>Thousands of products available. Add items to your cart and place an order for pickup or delivery.</p>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-dark" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=800&q=80" alt="Grocery store" class="about-image">
+      <div class="about-text">
+        <h3>Bringing <span>Flavours of Home</span> to Barrie</h3>
+        <p>Eden African &amp; Caribbean Groceries is your neighbourhood source for authentic ingredients from across Africa and the Caribbean. From the freshest tropical produce to hard-to-find spices, frozen specialties, and traditional bakery items — we stock what you remember from home.</p>
+        <p>We're proud to serve Barrie's growing Caribbean and African community. Whether you're cooking a Saturday jerk chicken, a hearty egusi soup, or just want fresh coconut water — we've got you covered.</p>
+        <div class="about-stats">
+          <div class="stat-card"><div class="num">1000+</div><div class="label">Products</div></div>
+          <div class="stat-card"><div class="num">50+</div><div class="label">Countries Served</div></div>
+          <div class="stat-card"><div class="num">7</div><div class="label">Days Fresh</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-cream" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Our <span>Customers Say</span></h2>
+      <p>Real reviews from our community in Barrie.</p>
+    </div>
+    <div class="testimonials" id="testimonialsGrid">
+      <div class="testimonial-card">
+        <div class="quote">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>Finally a place in Barrie where I can find all the ingredients for my mom's Jamaican recipes. The scotch bonnet peppers are always fresh!</p>
+        <div class="author">Michelle T. <span>— Barrie</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>The frozen mackerel and ogbono are exactly what I was looking for. Will definitely be ordering again. Fast delivery too!</p>
+        <div class="author">Chidi O. <span>— Barrie</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote">"</div>
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p>Love the hard dough bread and the coconut drops — tastes just like what my grandmother used to make. So happy to have this store in town!</p>
+        <div class="author">Patricia M. <span>— Barrie</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-light" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2>Get in <span>Touch</span></h2>
+      <p>Questions about our products or want to place a large order? Reach out to us.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info-card">
+        <h3>Contact Information</h3>
+        <div class="contact-detail">
+          <i class="fas fa-map-pin"></i>
+          <div><strong>Location</strong><p>Barrie, Ontario, Canada</p></div>
+        </div>
+        <div class="contact-detail">
+          <i class="fas fa-phone"></i>
+          <div><strong>Phone</strong><p>(705) 796-... <small style="color:#999;font-size:11px">(call for exact address &amp; hours)</small></p></div>
+        </div>
+        <div class="contact-detail">
+          <i class="fas fa-clock"></i>
+          <div><strong>Hours</strong><p>Mon-Sat: 9AM - 7PM • Sunday: Closed</p></div>
+        </div>
+        <div class="contact-detail">
+          <i class="fas fa-instagram"></i>
+          <div><strong>Follow Us</strong><p>@shopfest_inc — see our latest arrivals and specials</p></div>
+        </div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/shopfest_inc/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" onclick="alert('Facebook page coming soon!');return false"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <h3>Send Us a Message</h3>
+        <form onsubmit="sendMessage(event)">
+          <div class="form-group"><input type="text" id="msgName" placeholder="Your Name" required></div>
+          <div class="form-group"><input type="email" id="msgEmail" placeholder="Your Email" required></div>
+          <div class="form-group"><textarea id="msgText" rows="4" placeholder="How can we help?" required></textarea></div>
+          <button type="submit" class="btn btn-green" style="width:100%"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3><i class="fas fa-shopping-basket"></i> Your Basket</h3>
+    <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <i class="fas fa-basket-shopping"></i>
+      <p>Your cart is empty</p>
+      <p style="font-size:13px;color:var(--text-light);margin-top:8px">Browse products and add items to get started.</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <button class="cart-checkout" onclick="openCheckout()"><i class="fas fa-lock"></i> Proceed to Order</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal" onclick="if(event.target===this)closeCheckout()">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
+    <h3>Place Your Order</h3>
+    <p>Enter your details and we'll confirm your order by phone or email.</p>
+    <form onsubmit="submitOrder(event)">
+      <div class="form-row">
+        <div class="form-group"><label>Full Name</label><input type="text" id="orderName" required></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="orderPhone" required></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" id="orderEmail" required></div>
+      <div class="form-group"><label>Delivery or Pickup?</label>
+        <select id="orderMethod"><option value="pickup">Pickup at Store</option><option value="delivery">Delivery (within Barrie)</option></select>
+      </div>
+      <div class="form-group"><label>Delivery Address (if delivery selected)</label><input type="text" id="orderAddress" placeholder="Street, City, Postal Code"></div>
+      <div class="form-group"><label>Order Notes</label><textarea id="orderNotes" placeholder="Any special requests or substitutions?"></textarea></div>
+      <div class="order-summary" id="orderSummary"><h4>Order Summary</h4><div id="orderSummaryItems"></div><div class="order-summary-total"><span>Total</span><span id="orderSummaryTotal">$0.00</span></div></div>
+      <button type="submit" class="submit-order"><i class="fas fa-paper-plane"></i> Submit Order</button>
+      <p style="text-align:center;font-size:12px;color:var(--text-light);margin-top:12px">We'll call you to confirm availability and arrange pickup or delivery.</p>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-icon" style="margin-bottom:12px"><span>E</span><span class="crown">👑</span></div>
+      <p>Eden African &amp; Caribbean Groceries brings the authentic flavours of home to Barrie, Ontario. Fresh produce, spices, frozen goods, and more — order online for pickup or delivery.</p>
+    </div>
+    <div><h4>Quick Links</h4><a href="#categories">Shop Categories</a><a href="#products">Products</a><a href="#about">About Us</a><a href="#contact">Contact</a></div>
+    <div><h4>Shop</h4><a href="#categories">Fresh Produce</a><a href="#categories">Spices &amp; Seasonings</a><a href="#categories">Frozen Fish &amp; Meat</a><a href="#categories">Rice &amp; Grains</a><a href="#categories">Bakery &amp; Snacks</a><a href="#categories">Beverages</a></div>
+    <div><h4>Contact</h4><p>Barrie, Ontario</p><p>(705) 796-....</p><p>Mon-Sat: 9AM-7PM</p><p style="margin-top:12px"><a href="https://www.instagram.com/shopfest_inc/" target="_blank" style="display:inline"><i class="fab fa-instagram"></i> @shopfest_inc</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 Eden African &amp; Caribbean Groceries. All rights reserved. | Barrie, Ontario</p></div>
+</footer>
+
+<script>
+// ── DATA ──
+const BUSINESS = {
+  name:'Eden African & Caribbean Groceries',
+  phone:'(705) 796-....',
+  email:'shopfestinc@gmail.com',
+  address:'Barrie, Ontario',
+  instagram:'shopfest_inc'
+};
+
+const categories = [
+  {name:'Fresh Produce',desc:'Tropical fruits, vegetables, yams, plantains & more',icon:'fa-carrot',count:'50+'},
+  {name:'Spices & Seasonings',desc:'Jerk, curry, scotch bonnet, ogbono & traditional spices',icon:'fa-mortar-pestle',count:'80+'},
+  {name:'Frozen Fish & Meat',desc:'Mackerel, tilapia, snapper, oxtail & specialty cuts',icon:'fa-fish',count:'40+'},
+  {name:'Rice & Grains',desc:'Jasmine, basmati, brown rice, beans, fufu flour & grains',icon:'fa-wheat-awn',count:'30+'},
+  {name:'Bakery & Snacks',desc:'Hard dough bread, coconut drops, gizzada & traditional treats',icon:'fa-bread-slice',count:'25+'},
+  {name:'Beverages',desc:'Sorrel, ginger beer, coconut water, mauby & Caribbean drinks',icon:'fa-wine-bottle',count:'40+'},
+  {name:'Cooking Ingredients',desc:'Palm oil, coconut milk, cassava flour & essential pantry items',icon:'fa-oil-can',count:'60+'},
+  {name:'Dairy & Chilled',desc:'Fresh dairy, plant-based milks & chilled juices',icon:'fa-cheese',count:'20+'},
+];
+
+const products = [
+  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80',best:true},
+  {name:'Scotch Bonnet Peppers',cat:'Spices',origin:'Trinidad',price:4.99,unit:'pack',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80',best:true},
+  {name:'Frozen Mackerel',cat:'Frozen',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&q=80',best:true},
+  {name:'Jasmine Rice 5lb',cat:'Rice',origin:'Thailand',price:8.99,unit:'bag',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80',best:false},
+  {name:'Hard Dough Bread',cat:'Bakery',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',best:true},
+  {name:'Caribbean Sorrel',cat:'Beverages',origin:'Trinidad',price:3.99,unit:'bottle',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80',best:false},
+  {name:'Plantains (Green)',cat:'Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://images.unsplash.com/photo-1563379092-713a12b607dd?w=400&q=80',best:false},
+  {name:'Palm Oil',cat:'Cooking',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80',best:false},
+  {name:'Ogbono Seeds',cat:'Spices',origin:'Nigeria',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1596040033229-982a0d3c2d5e?w=400&q=80',best:false},
+  {name:'Frozen Tilapia',cat:'Frozen',origin:'Honduras',price:6.49,unit:'lb',img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80',best:false},
+  {name:'Coconut Drops',cat:'Bakery',origin:'Jamaica',price:3.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false},
+  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&q=80',best:false},
+];
+
+// ── CART ──
+let cart = JSON.parse(localStorage.getItem('edenCart')||'[]');
+function saveCart(){localStorage.setItem('edenCart',JSON.stringify(cart));updateCartUI()}
+function updateCartUI(){
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent=count;
+  const container=document.getElementById('cartItems');
+  if(!cart.length){
+    container.innerHTML='<div class="cart-empty"><i class="fas fa-basket-shopping"></i><p>Your cart is empty</p><p style="font-size:13px;color:#999;margin-top:8px">Browse products and add items to get started.</p></div>';
+    document.getElementById('cartTotal').textContent='$0.00';return;
+  }
+  let html='',total=0;
+  cart.forEach((item,i)=>{
+    const t=item.price*item.qty;total+=t;
+    html+=`<div class="cart-item"><img src="${item.img}" class="cart-item-img" alt="${item.name}"><div class="cart-item-info"><h4>${item.name}</h4><div class="price">$${item.price.toFixed(2)} / ${item.unit}</div><div class="cart-item-qty"><button onclick="changeQty(${i},-1)">−</button><span>${item.qty}</span><button onclick="changeQty(${i},1)">+</button><button class="cart-item-remove" onclick="removeItem(${i})"><i class="fas fa-trash-can"></i></button></div></div></div>`;
+  });
+  document.getElementById('cartItems').innerHTML=html;
+  document.getElementById('cartTotal').textContent=`$${total.toFixed(2)}`;
+}
+function changeQty(i,d){if(!cart[i])return;cart[i].qty=Math.max(1,cart[i].qty+d);saveCart()}
+function removeItem(i){cart.splice(i,1);saveCart()}
+function toggleCart(){document.getElementById('cartOverlay').classList.toggle('active');document.getElementById('cartSidebar').classList.toggle('active')}
+
+// ── RENDER ──
+function renderCategories(){
+  const grid=document.getElementById('categoriesGrid');
+  grid.innerHTML=categories.map(c=>`
+    <div class="category-card">
+      <div style="height:220px;background:linear-gradient(135deg,var(--green-50),var(--green-100, #d1fae5));display:flex;align-items:center;justify-content:center">
+        <i class="fas ${c.icon}" style="font-size:64px;color:var(--green-600);opacity:.6"></i>
+      </div>
+      <div class="category-card-body">
+        <h3>${c.name}</h3>
+        <p>${c.desc}</p>
+        <span class="category-count">${c.count} items <i class="fas fa-arrow-right" style="margin-left:4px;font-size:10px"></i></span>
+      </div>
+    </div>`).join('');
+}
+function renderProducts(){
+  const grid=document.getElementById('productsGrid');
+  grid.innerHTML=products.map((p,i)=>`
+    <div class="product-card">
+      ${p.best?'<div class="badge-seller">Bestseller</div>':''}
+      <img src="${p.img}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80'">
+      <div class="product-info">
+        <h4>${p.name}</h4>
+        <div class="origin">${p.origin}</div>
+        <div class="price">$${p.price.toFixed(2)} <span class="unit">/ ${p.unit}</span></div>
+        <button class="add-to-cart" onclick="addToCart(${i})"><i class="fas fa-plus"></i> Add to Cart</button>
+      </div>
+    </div>`).join('');
+}
+function addToCart(i){
+  const p=products[i];
+  const existing=cart.find(item=>item.name===p.name);
+  if(existing){existing.qty++}else{cart.push({...p,qty:1})}
+  saveCart();
+  // feedback
+  const btn=event.target.closest('.add-to-cart');
+  btn.innerHTML='<i class="fas fa-check"></i> Added!';btn.style.background='var(--green-600)';btn.style.color='white';
+  setTimeout(()=>{btn.innerHTML='<i class="fas fa-plus"></i> Add to Cart';btn.style.background='';btn.style.color=''},1200);
+}
+renderCategories();renderProducts();updateCartUI();
+
+// ── CHECKOUT ──
+function openCheckout(){
+  if(!cart.length){alert('Your cart is empty!');return}
+  toggleCart();
+  // populate summary
+  let html='',total=0;
+  cart.forEach(item=>{
+    const t=item.price*item.qty;total+=t;
+    html+=`<div class="order-summary-item"><span>${item.qty}x ${item.name}</span><span>$${t.toFixed(2)}</span></div>`;
+  });
+  document.getElementById('orderSummaryItems').innerHTML=html;
+  document.getElementById('orderSummaryTotal').textContent=`$${total.toFixed(2)}`;
+  document.getElementById('checkoutModal').classList.add('active');
+}
+function closeCheckout(){document.getElementById('checkoutModal').classList.remove('active')}
+function submitOrder(e){
+  e.preventDefault();
+  const name=document.getElementById('orderName').value;
+  const phone=document.getElementById('orderPhone').value;
+  const email=document.getElementById('orderEmail').value;
+  const method=document.getElementById('orderMethod').value;
+  const address=document.getElementById('orderAddress').value;
+  const notes=document.getElementById('orderNotes').value;
+  
+  let orderText=`=== NEW ORDER - Eden Groceries ===\n`;
+  orderText+=`Customer: ${name}\nPhone: ${phone}\nEmail: ${email}\nMethod: ${method}\n`;
+  if(address) orderText+=`Address: ${address}\n`;
+  orderText+=`Notes: ${notes||'none'}\n\n--- ITEMS ---\n`;
+  let total=0;
+  cart.forEach(item=>{
+    const t=item.price*item.qty;total+=t;
+    orderText+=`${item.qty}x ${item.name} @ $${item.price.toFixed(2)} = $${t.toFixed(2)}\n`;
+  });
+  orderText+=`\nTOTAL: $${total.toFixed(2)}\n==================`;
+  
+  console.log(orderText);
+  
+  // Build mailto link
+  const subject=encodeURIComponent(`New Order from ${name} — Eden Groceries`);
+  const body=encodeURIComponent(orderText);
+  
+  // Clear cart and show thank you
+  cart=[];saveCart();closeCheckout();
+  
+  alert(`Thank you, ${name}! Your order has been received.\n\nWe'll call you at ${phone} to confirm availability and arrange ${method}.\n\nAn email summary has been prepared for our team.`);
+  
+  // Open email client
+  window.open(`mailto:${BUSINESS.email}?subject=${subject}&body=${body}`,'_blank');
+  
+  document.getElementById('orderName').value='';
+  document.getElementById('orderPhone').value='';
+  document.getElementById('orderEmail').value='';
+  document.getElementById('orderAddress').value='';
+  document.getElementById('orderNotes').value='';
+}
+
+// ── CONTACT FORM ──
+function sendMessage(e){
+  e.preventDefault();
+  const name=document.getElementById('msgName').value;
+  const email=document.getElementById('msgEmail').value;
+  const msg=document.getElementById('msgText').value;
+  const subject=encodeURIComponent(`Message from ${name} — Eden Groceries Inquiry`);
+  const body=encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${msg}`);
+  window.open(`mailto:${BUSINESS.email}?subject=${subject}&body=${body}`,'_blank');
+  alert('Message opened in your email client. Thank you!');
+  document.getElementById('msgName').value='';
+  document.getElementById('msgEmail').value='';
+  document.getElementById('msgText').value='';
+}
+
+// ── HIDE HEADER ON SCROLL DOWN ──
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const curr=window.scrollY;
+  document.getElementById('header').style.transform=curr>lastScroll&&curr>100?'translateY(-100%)':'translateY(0)';
+  lastScroll=curr;
+});
+</script>
+</body>
+</html>
