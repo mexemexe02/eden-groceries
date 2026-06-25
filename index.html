@@ -105,6 +105,32 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 .add-to-cart{width:100%;padding:10px;background:var(--green-50);border:1px solid var(--green-200);border-radius:8px;color:var(--green-700);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .add-to-cart:hover{background:var(--green-600);color:var(--white);border-color:var(--green-600)}
 
+/* ── FILTER TABS ── */
+.filter-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
+.filter-tab{padding:10px 22px;border-radius:50px;border:1.5px solid var(--green-200);background:var(--white);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+.filter-tab:hover{border-color:var(--green-600);color:var(--green-700)}
+.filter-tab.active{background:var(--green-600);color:var(--white);border-color:var(--green-600)}
+
+/* ── PRODUCT DETAIL MODAL ── */
+.product-modal .modal{max-width:720px;padding:0;overflow:hidden;border-radius:var(--radius-lg)}
+.product-modal-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.product-modal-image{background:var(--green-50);display:flex;align-items:center;justify-content:center;min-height:360px}
+.product-modal-image img{width:100%;height:100%;object-fit:cover}
+.product-modal-info{padding:32px;display:flex;flex-direction:column;justify-content:center}
+.product-modal-info .badge{display:inline-block;background:var(--gold);color:var(--white);font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;margin-bottom:12px;width:fit-content}
+.product-modal-info h3{font-size:22px;color:var(--text);margin-bottom:6px}
+.product-modal-info .origin{font-size:13px;color:var(--text-light);margin-bottom:12px}
+.product-modal-info .desc{font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px}
+.product-modal-info .price{font-size:24px;font-weight:700;color:var(--green-700);margin-bottom:20px}
+.product-modal-info .price .unit{font-size:13px;font-weight:400;color:var(--text-light)}
+.product-modal-info .qty-selector{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.product-modal-info .qty-selector button{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--green-200);background:var(--white);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.product-modal-info .qty-selector button:hover{background:var(--green-50);border-color:var(--green-600)}
+.product-modal-info .qty-selector span{font-size:16px;font-weight:600;width:32px;text-align:center}
+.product-modal-info .add-to-cart-btn{width:100%;padding:14px;background:var(--green-600);color:var(--white);border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.product-modal-info .add-to-cart-btn:hover{background:var(--green-700);transform:translateY(-2px)}
+@media(max-width:640px){.product-modal-body{grid-template-columns:1fr}.product-modal-image{min-height:240px}}
+
 /* ── STORE INFO BAR ── */
 .info-bar{background:var(--white);border-bottom:1px solid rgba(0,0,0,0.06)}
 .info-bar-inner{max-width:1400px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
@@ -313,9 +339,13 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
   <div class="container">
     <div class="section-header">
       <h2>Our <span>Products</span></h2>
-      <p>Thousands of products available. Add items to your cart and place an order for pickup or delivery.</p>
+      <p>Thousands of products available. Use the filters below to browse by category.</p>
     </div>
+    <div class="filter-tabs" id="filterTabs"></div>
     <div class="products-grid" id="productsGrid"></div>
+    <div class="text-center" style="margin-top:32px">
+      <p style="color:var(--text-light);font-size:14px">Don't see what you need? <a href="#contact" style="color:var(--green-600);font-weight:500">Contact us</a> — we source thousands of products.</p>
+    </div>
   </div>
 </section>
 
@@ -432,6 +462,14 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
   </div>
 </div>
 
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay product-modal" id="productModal" onclick="if(event.target===this)closeProductModal()">
+  <div class="modal" style="position:relative;padding:0">
+    <button class="modal-close" onclick="closeProductModal()" style="position:absolute;top:12px;right:12px;z-index:10;background:rgba(255,255,255,0.9);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-size:16px;color:#333"><i class="fas fa-times"></i></button>
+    <div class="product-modal-body" id="productModalBody"></div>
+  </div>
+</div>
+
 <!-- CHECKOUT MODAL -->
 <div class="modal-overlay" id="checkoutModal" onclick="if(event.target===this)closeCheckout()">
   <div class="modal" style="position:relative">
@@ -472,43 +510,131 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 
 <script>
 // ── DATA ──
-const BUSINESS = {
-  name:'Eden African & Caribbean Groceries',
-  phone:'(705) 796-....',
-  email:'shopfestinc@gmail.com',
-  address:'Barrie, Ontario',
-  instagram:'shopfest_inc'
-};
-
-const categories = [
-  {name:'Fresh Produce',desc:'Tropical fruits, vegetables, yams, plantains & more',icon:'fa-carrot',count:'50+'},
-  {name:'Spices & Seasonings',desc:'Jerk, curry, scotch bonnet, ogbono & traditional spices',icon:'fa-mortar-pestle',count:'80+'},
-  {name:'Frozen Fish & Meat',desc:'Mackerel, tilapia, snapper, oxtail & specialty cuts',icon:'fa-fish',count:'40+'},
-  {name:'Rice & Grains',desc:'Jasmine, basmati, brown rice, beans, fufu flour & grains',icon:'fa-wheat-awn',count:'30+'},
-  {name:'Bakery & Snacks',desc:'Hard dough bread, coconut drops, gizzada & traditional treats',icon:'fa-bread-slice',count:'25+'},
-  {name:'Beverages',desc:'Sorrel, ginger beer, coconut water, mauby & Caribbean drinks',icon:'fa-wine-bottle',count:'40+'},
-  {name:'Cooking Ingredients',desc:'Palm oil, coconut milk, cassava flour & essential pantry items',icon:'fa-oil-can',count:'60+'},
-  {name:'Dairy & Chilled',desc:'Fresh dairy, plant-based milks & chilled juices',icon:'fa-cheese',count:'20+'},
-];
+const BUSINESS = {name:'Eden African & Caribbean Groceries',phone:'(705) 796-....',email:'shopfestinc@gmail.com',address:'Barrie, Ontario',instagram:'shopfest_inc'};
+const GROCERY_IMG = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80';
 
 const products = [
-  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80',best:true},
-  {name:'Scotch Bonnet Peppers',cat:'Spices',origin:'Trinidad',price:4.99,unit:'pack',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80',best:true},
-  {name:'Frozen Mackerel',cat:'Frozen',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&q=80',best:true},
-  {name:'Jasmine Rice 5lb',cat:'Rice',origin:'Thailand',price:8.99,unit:'bag',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80',best:false},
-  {name:'Hard Dough Bread',cat:'Bakery',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',best:true},
-  {name:'Caribbean Sorrel',cat:'Beverages',origin:'Trinidad',price:3.99,unit:'bottle',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80',best:false},
-  {name:'Plantains (Green)',cat:'Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://images.unsplash.com/photo-1563379092-713a12b607dd?w=400&q=80',best:false},
-  {name:'Palm Oil',cat:'Cooking',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80',best:false},
-  {name:'Ogbono Seeds',cat:'Spices',origin:'Nigeria',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1596040033229-982a0d3c2d5e?w=400&q=80',best:false},
-  {name:'Frozen Tilapia',cat:'Frozen',origin:'Honduras',price:6.49,unit:'lb',img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80',best:false},
-  {name:'Coconut Drops',cat:'Bakery',origin:'Jamaica',price:3.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false},
-  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&q=80',best:false},
+  // Fresh Produce
+  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80',best:true,desc:'Premium Jamaican yams — starchy, earthy, perfect for boiling, frying or roasting. A staple in Caribbean kitchens.'},
+  {name:'Green Plantains',cat:'Fresh Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://images.unsplash.com/photo-1563379092-713a12b607dd?w=400&q=80',best:false,desc:'Firm green plantains ideal for tostones, mofongo, or slicing and frying into chips.'},
+  {name:'Cassava (Yuca)',cat:'Fresh Produce',origin:'Costa Rica',price:3.49,unit:'lb',img:'https://images.unsplash.com/photo-1584486181114-3ba447e2d40b?w=400&q=80',best:false,desc:'Fresh cassava root — boil, fry, or mash. A versatile staple across Africa and the Caribbean.'},
+  {name:'Fresh Coconut',cat:'Fresh Produce',origin:'Jamaica',price:2.99,unit:'each',img:'https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=400&q=80',best:false,desc:'Young green coconuts with sweet water inside. Crack open for fresh coconut water and tender meat.'},
+  {name:'Okra',cat:'Fresh Produce',origin:'Honduras',price:2.99,unit:'lb',img:'https://images.unsplash.com/photo-1425543103980-d7e58c6aa38c?w=400&q=80',best:false,desc:'Fresh okra pods — essential for soups, stews, and gumbo. Tender and flavourful.'},
+  // Spices & Seasonings
+  {name:'Scotch Bonnet Peppers',cat:'Spices & Seasonings',origin:'Trinidad',price:4.99,unit:'pack',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80',best:true,desc:'Fiery scotch bonnet peppers — the heart of Caribbean heat. Use whole for flavour or chopped for serious spice.'},
+  {name:'Ogbono Seeds',cat:'Spices & Seasonings',origin:'Nigeria',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1596040033229-982a0d3c2d5e?w=400&q=80',best:false,desc:'Ground ogbono seeds — the traditional thickener for Nigerian ogbono soup. Rich, nutty flavour.'},
+  {name:'Jerk Seasoning',cat:'Spices & Seasonings',origin:'Jamaica',price:6.99,unit:'jar',img:'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=400&q=80',best:true,desc:'Traditional Jamaican jerk seasoning — allspice, thyme, scotch bonnet, and secret blend. Perfect for chicken, pork, or fish.'},
+  {name:'Curry Powder',cat:'Spices & Seasonings',origin:'Trinidad',price:4.49,unit:'pack',img:'https://images.unsplash.com/photo-1591099441548-47d9a442b6b8?w=400&q=80',best:false,desc:'Trinidad-style curry powder — aromatic and vibrant. The base for doubles, curry chicken, and goat.'},
+  // Frozen
+  {name:'Frozen Mackerel',cat:'Frozen Fish & Meat',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&q=80',best:true,desc:'Whole frozen mackerel — rich, oily fish perfect for steaming, frying, or grilling. A West African favourite.'},
+  {name:'Frozen Tilapia',cat:'Frozen Fish & Meat',origin:'Honduras',price:6.49,unit:'lb',img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80',best:false,desc:'Whole frozen tilapia — mild, flaky white fish. Great for frying or baking with traditional seasonings.'},
+  {name:'Frozen Snapper',cat:'Frozen Fish & Meat',origin:'Guyana',price:9.99,unit:'lb',img:'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=400&q=80',best:false,desc:'Red snapper — premium fish for special occasions. Escovitch, brown stew, or simply fried to perfection.'},
+  {name:'Frozen Oxtail',cat:'Frozen Fish & Meat',origin:'Jamaica',price:11.99,unit:'lb',img:'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&q=80',best:true,desc:'Premium oxtail cuts — slow-cook to perfection for classic Jamaican oxtail stew. Rich, gelatinous, unforgettable.'},
+  // Rice & Grains
+  {name:'Jasmine Rice 5lb',cat:'Rice & Grains',origin:'Thailand',price:8.99,unit:'bag',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80',best:false,desc:'Aromatic jasmine rice — long grain, fragrant, fluffy. The everyday rice for Caribbean and African kitchens.'},
+  {name:'Basmati Rice 5lb',cat:'Rice & Grains',origin:'India',price:9.99,unit:'bag',img:'https://images.unsplash.com/photo-1551044289-d0e98e9b53a2?w=400&q=80',best:false,desc:'Premium basmati rice — aromatic, light, and separate grains. Perfect for pulao and special meals.'},
+  {name:'Brown Rice 5lb',cat:'Rice & Grains',origin:'USA',price:7.49,unit:'bag',img:'https://images.unsplash.com/photo-1553532435-93d530a97bb1?w=400&q=80',best:false,desc:'Whole grain brown rice — nutritious, hearty, fibre-rich. A healthier choice for everyday cooking.'},
+  {name:'Fufu Flour',cat:'Rice & Grains',origin:'Ghana',price:5.99,unit:'pack',img:'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80',best:true,desc:'Traditional fufu flour — mix with water for smooth, stretchy fufu. The perfect partner for soups and stews.'},
+  // Bakery
+  {name:'Hard Dough Bread',cat:'Bakery & Snacks',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',best:true,desc:'Traditional Jamaican hard dough bread — dense, slightly sweet, perfect toasted with butter or for sandwiches.'},
+  {name:'Coconut Drops',cat:'Bakery & Snacks',origin:'Jamaica',price:3.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false,desc:'Sweet coconut drops — chewy, gingery, and utterly addictive. A classic Jamaican snack.'},
+  {name:'Spice Buns',cat:'Bakery & Snacks',origin:'Jamaica',price:3.99,unit:'each',img:'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80',best:false,desc:'Aromatic Jamaican spice buns — dark, fruity, spiced with cinnamon and nutmeg. Easter favourite, loved year-round.'},
+  // Beverages
+  {name:'Caribbean Sorrel',cat:'Beverages',origin:'Trinidad',price:3.99,unit:'bottle',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80',best:false,desc:'Traditional sorrel drink — made from hibiscus, spiced with ginger and cloves. A Christmas classic, delicious year-round.'},
+  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&q=80',best:false,desc:'Fiery Jamaican ginger beer — real ginger kick, naturally carbonated. Refreshing and digestive.'},
+  {name:'Coconut Water',cat:'Beverages',origin:'Brazil',price:2.99,unit:'bottle',img:'https://images.unsplash.com/photo-1529693662653-9d480530a697?w=400&q=80',best:false,desc:'Pure coconut water — hydrating, natural electrolytes. Straight from young coconuts.'},
+  {name:'Mauby Drink',cat:'Beverages',origin:'Trinidad',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80',best:false,desc:'Traditional mauby — bark-based Caribbean drink, slightly bitter-sweet with an earthy finish. An acquired taste loved by many.'},
+  // Cooking
+  {name:'Red Palm Oil',cat:'Cooking Ingredients',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80',best:true,desc:'Vibrant red palm oil — essential for West African cooking. Rich in beta-carotene, authentic flavour for soups and stews.'},
+  {name:'Coconut Milk',cat:'Cooking Ingredients',origin:'Thailand',price:3.99,unit:'can',img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80',best:false,desc:'Rich coconut milk — creamy base for Caribbean and African curries, rice dishes, and sweets.'},
+  {name:'Cassava Flour',cat:'Cooking Ingredients',origin:'Brazil',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false,desc:'Fine cassava flour — gluten-free, versatile. Perfect for baking, thickening, and traditional recipes.'},
 ];
 
-// ── CART ──
+// ── CATEGORY NAMES (for filter buttons) ──
+const categoryNames = [...new Set(products.map(p=>p.cat))];
+
+// ── STATE ──
+let activeFilter = 'All';
 let cart = JSON.parse(localStorage.getItem('edenCart')||'[]');
 function saveCart(){localStorage.setItem('edenCart',JSON.stringify(cart));updateCartUI()}
+
+// ── RENDER FILTER TABS ──
+function renderFilters(){
+  const container=document.getElementById('filterTabs');
+  const tabs=['All',...categoryNames];
+  container.innerHTML=tabs.map(c=>`<button class="filter-tab ${c===activeFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
+}
+function setFilter(cat){
+  activeFilter=cat;
+  renderFilters();
+  renderProducts();
+}
+
+// ── RENDER PRODUCTS ──
+function renderProducts(){
+  const grid=document.getElementById('productsGrid');
+  const filtered=activeFilter==='All'?products:products.filter(p=>p.cat===activeFilter);
+  grid.innerHTML=filtered.map((p,i)=>{
+    const globalIdx=products.indexOf(p);
+    return `<div class="product-card" onclick="openProductModal(${globalIdx})">
+      ${p.best?'<div class="badge-seller">Bestseller</div>':''}
+      <img src="${p.img}" alt="${p.name}" onerror="this.src='${GROCERY_IMG}'" loading="lazy">
+      <div class="product-info">
+        <h4>${p.name}</h4>
+        <div class="origin">${p.origin} · ${p.cat}</div>
+        <div class="price">$${p.price.toFixed(2)} <span class="unit">/ ${p.unit}</span></div>
+        <button class="add-to-cart" onclick="event.stopPropagation();quickAdd(${globalIdx})"><i class="fas fa-plus"></i> Add to Cart</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function quickAdd(i){
+  const p=products[i],existing=cart.find(item=>item.name===p.name);
+  if(existing){existing.qty++}else{cart.push({...p,qty:1})}
+  saveCart();
+  const btn=event.target.closest('.add-to-cart');
+  btn.innerHTML='<i class="fas fa-check"></i> Added!';btn.style.background='var(--green-600)';btn.style.color='white';
+  setTimeout(()=>{btn.innerHTML='<i class="fas fa-plus"></i> Add to Cart';btn.style.background='';btn.style.color=''},1200);
+}
+
+// ── PRODUCT DETAIL MODAL ──
+function openProductModal(i){
+  const p=products[i];
+  let qty=1;
+  const body=document.getElementById('productModalBody');
+  body.innerHTML=`
+    <div class="product-modal-image"><img src="${p.img}" alt="${p.name}" onerror="this.src='${GROCERY_IMG}'"></div>
+    <div class="product-modal-info">
+      ${p.best?'<div class="badge">Bestseller</div>':''}
+      <h3>${p.name}</h3>
+      <div class="origin">${p.origin} · ${p.cat}</div>
+      <p class="desc">${p.desc}</p>
+      <div class="price">$${p.price.toFixed(2)} <span class="unit">/ ${p.unit}</span></div>
+      <div class="qty-selector">
+        <button onclick="changeModalQty(-1)">−</button>
+        <span id="modalQty">1</span>
+        <button onclick="changeModalQty(1)">+</button>
+      </div>
+      <button class="add-to-cart-btn" onclick="addFromModal(${i})"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+    </div>`;
+  window._modalQty=1;
+  window._modalIdx=i;
+  document.getElementById('productModal').classList.add('active');
+}
+function changeModalQty(d){window._modalQty=Math.max(1,window._modalQty+d);document.getElementById('modalQty').textContent=window._modalQty}
+function addFromModal(i){
+  const p=products[i],q=window._modalQty||1;
+  const existing=cart.find(item=>item.name===p.name);
+  if(existing){existing.qty+=q}else{cart.push({...p,qty:q})}
+  saveCart();
+  closeProductModal();
+  // show cart
+  document.getElementById('cartSidebar').classList.add('active');
+  document.getElementById('cartOverlay').classList.add('active');
+}
+function closeProductModal(){document.getElementById('productModal').classList.remove('active')}
+
+// ── CART ──
 function updateCartUI(){
   const count=cart.reduce((s,i)=>s+i.qty,0);
   document.getElementById('cartCount').textContent=count;
@@ -529,57 +655,37 @@ function changeQty(i,d){if(!cart[i])return;cart[i].qty=Math.max(1,cart[i].qty+d)
 function removeItem(i){cart.splice(i,1);saveCart()}
 function toggleCart(){document.getElementById('cartOverlay').classList.toggle('active');document.getElementById('cartSidebar').classList.toggle('active')}
 
-// ── RENDER ──
+// ── RENDER CATEGORIES ──
 function renderCategories(){
+  const cats=[
+    {name:'Fresh Produce',icon:'fa-carrot',count:'50+'},
+    {name:'Spices & Seasonings',icon:'fa-mortar-pestle',count:'80+'},
+    {name:'Frozen Fish & Meat',icon:'fa-fish',count:'40+'},
+    {name:'Rice & Grains',icon:'fa-wheat-awn',count:'30+'},
+    {name:'Bakery & Snacks',icon:'fa-bread-slice',count:'25+'},
+    {name:'Beverages',icon:'fa-wine-bottle',count:'40+'},
+    {name:'Cooking Ingredients',icon:'fa-oil-can',count:'60+'},
+    {name:'Dairy & Chilled',icon:'fa-cheese',count:'20+'},
+  ];
   const grid=document.getElementById('categoriesGrid');
-  grid.innerHTML=categories.map(c=>`
-    <div class="category-card">
-      <div style="height:220px;background:linear-gradient(135deg,var(--green-50),var(--green-100, #d1fae5));display:flex;align-items:center;justify-content:center">
-        <i class="fas ${c.icon}" style="font-size:64px;color:var(--green-600);opacity:.6"></i>
+  grid.innerHTML=cats.map(c=>`
+    <div class="category-card" onclick="setFilter('${c.name}');document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+      <div style="height:200px;background:linear-gradient(135deg,var(--green-50),#d1fae5);display:flex;align-items:center;justify-content:center">
+        <i class="fas ${c.icon}" style="font-size:56px;color:var(--green-600);opacity:.6"></i>
       </div>
       <div class="category-card-body">
         <h3>${c.name}</h3>
-        <p>${c.desc}</p>
         <span class="category-count">${c.count} items <i class="fas fa-arrow-right" style="margin-left:4px;font-size:10px"></i></span>
       </div>
     </div>`).join('');
 }
-function renderProducts(){
-  const grid=document.getElementById('productsGrid');
-  grid.innerHTML=products.map((p,i)=>`
-    <div class="product-card">
-      ${p.best?'<div class="badge-seller">Bestseller</div>':''}
-      <img src="${p.img}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80'">
-      <div class="product-info">
-        <h4>${p.name}</h4>
-        <div class="origin">${p.origin}</div>
-        <div class="price">$${p.price.toFixed(2)} <span class="unit">/ ${p.unit}</span></div>
-        <button class="add-to-cart" onclick="addToCart(${i})"><i class="fas fa-plus"></i> Add to Cart</button>
-      </div>
-    </div>`).join('');
-}
-function addToCart(i){
-  const p=products[i];
-  const existing=cart.find(item=>item.name===p.name);
-  if(existing){existing.qty++}else{cart.push({...p,qty:1})}
-  saveCart();
-  // feedback
-  const btn=event.target.closest('.add-to-cart');
-  btn.innerHTML='<i class="fas fa-check"></i> Added!';btn.style.background='var(--green-600)';btn.style.color='white';
-  setTimeout(()=>{btn.innerHTML='<i class="fas fa-plus"></i> Add to Cart';btn.style.background='';btn.style.color=''},1200);
-}
-renderCategories();renderProducts();updateCartUI();
 
 // ── CHECKOUT ──
 function openCheckout(){
   if(!cart.length){alert('Your cart is empty!');return}
   toggleCart();
-  // populate summary
   let html='',total=0;
-  cart.forEach(item=>{
-    const t=item.price*item.qty;total+=t;
-    html+=`<div class="order-summary-item"><span>${item.qty}x ${item.name}</span><span>$${t.toFixed(2)}</span></div>`;
-  });
+  cart.forEach(item=>{const t=item.price*item.qty;total+=t;html+=`<div class="order-summary-item"><span>${item.qty}x ${item.name}</span><span>$${t.toFixed(2)}</span></div>`});
   document.getElementById('orderSummaryItems').innerHTML=html;
   document.getElementById('orderSummaryTotal').textContent=`$${total.toFixed(2)}`;
   document.getElementById('checkoutModal').classList.add('active');
@@ -587,61 +693,29 @@ function openCheckout(){
 function closeCheckout(){document.getElementById('checkoutModal').classList.remove('active')}
 function submitOrder(e){
   e.preventDefault();
-  const name=document.getElementById('orderName').value;
-  const phone=document.getElementById('orderPhone').value;
-  const email=document.getElementById('orderEmail').value;
-  const method=document.getElementById('orderMethod').value;
-  const address=document.getElementById('orderAddress').value;
-  const notes=document.getElementById('orderNotes').value;
-  
-  let orderText=`=== NEW ORDER - Eden Groceries ===\n`;
-  orderText+=`Customer: ${name}\nPhone: ${phone}\nEmail: ${email}\nMethod: ${method}\n`;
-  if(address) orderText+=`Address: ${address}\n`;
-  orderText+=`Notes: ${notes||'none'}\n\n--- ITEMS ---\n`;
-  let total=0;
-  cart.forEach(item=>{
-    const t=item.price*item.qty;total+=t;
-    orderText+=`${item.qty}x ${item.name} @ $${item.price.toFixed(2)} = $${t.toFixed(2)}\n`;
-  });
-  orderText+=`\nTOTAL: $${total.toFixed(2)}\n==================`;
-  
-  console.log(orderText);
-  
-  // Build mailto link
+  const name=document.getElementById('orderName').value,phone=document.getElementById('orderPhone').value,email=document.getElementById('orderEmail').value,method=document.getElementById('orderMethod').value,address=document.getElementById('orderAddress').value,notes=document.getElementById('orderNotes').value;
+  let order=`=== NEW ORDER - Eden Groceries ===\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nMethod: ${method}\n${address?'Address: '+address+'\n':''}Notes: ${notes||'none'}\n\n--- ITEMS ---\n`;
+  let total=0;cart.forEach(item=>{const t=item.price*item.qty;total+=t;order+=`${item.qty}x ${item.name} @ $${item.price.toFixed(2)} = $${t.toFixed(2)}\n`});
+  order+=`\nTOTAL: $${total.toFixed(2)}\n==================`;
   const subject=encodeURIComponent(`New Order from ${name} — Eden Groceries`);
-  const body=encodeURIComponent(orderText);
-  
-  // Clear cart and show thank you
+  const body=encodeURIComponent(order);
   cart=[];saveCart();closeCheckout();
-  
-  alert(`Thank you, ${name}! Your order has been received.\n\nWe'll call you at ${phone} to confirm availability and arrange ${method}.\n\nAn email summary has been prepared for our team.`);
-  
-  // Open email client
+  alert(`Thank you, ${name}! Your order has been received.\n\nWe'll call you at ${phone} to confirm availability and arrange ${method}.`);
   window.open(`mailto:${BUSINESS.email}?subject=${subject}&body=${body}`,'_blank');
-  
-  document.getElementById('orderName').value='';
-  document.getElementById('orderPhone').value='';
-  document.getElementById('orderEmail').value='';
-  document.getElementById('orderAddress').value='';
-  document.getElementById('orderNotes').value='';
+  ['orderName','orderPhone','orderEmail','orderAddress','orderNotes'].forEach(id=>document.getElementById(id).value='');
 }
-
-// ── CONTACT FORM ──
 function sendMessage(e){
   e.preventDefault();
-  const name=document.getElementById('msgName').value;
-  const email=document.getElementById('msgEmail').value;
-  const msg=document.getElementById('msgText').value;
-  const subject=encodeURIComponent(`Message from ${name} — Eden Groceries Inquiry`);
-  const body=encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${msg}`);
-  window.open(`mailto:${BUSINESS.email}?subject=${subject}&body=${body}`,'_blank');
+  const n=document.getElementById('msgName').value,e2=document.getElementById('msgEmail').value,m=document.getElementById('msgText').value;
+  window.open(`mailto:${BUSINESS.email}?subject=${encodeURIComponent('Message from '+n)}&body=${encodeURIComponent('From: '+n+'\nEmail: '+e2+'\n\n'+m)}`,'_blank');
   alert('Message opened in your email client. Thank you!');
-  document.getElementById('msgName').value='';
-  document.getElementById('msgEmail').value='';
-  document.getElementById('msgText').value='';
+  document.getElementById('msgName').value='';document.getElementById('msgEmail').value='';document.getElementById('msgText').value='';
 }
 
-// ── HIDE HEADER ON SCROLL DOWN ──
+// ── INIT ──
+renderCategories();renderFilters();renderProducts();updateCartUI();
+
+// ── HIDE HEADER ON SCROLL ──
 let lastScroll=0;
 window.addEventListener('scroll',()=>{
   const curr=window.scrollY;
