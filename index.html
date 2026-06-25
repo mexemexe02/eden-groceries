@@ -697,7 +697,7 @@ function submitOrder(e){
   const btn=document.querySelector('.submit-order');
   btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Submitting...';
   
-  fetch('https://eden-groceries-backend.178.156.135.237.nip.io/api/order',{
+  fetch('http://v11zzypa086cx0y6l4ugz7no.178.156.135.237.sslip.io/api/order',{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)
   }).then(r=>r.json()).then(data=>{
     cart=[];saveCart();closeCheckout();
