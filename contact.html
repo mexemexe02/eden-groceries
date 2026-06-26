@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Contact — Eden African & Caribbean Groceries | Barrie, ON</title>
+<meta name="description" content="Get in touch with Eden African & Caribbean Groceries in Barrie, Ontario. Visit us, call, or send us a message. We'd love to hear from you!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green-900:#0a3d2b;--green-800:#0f5a3e;--green-700:#167a54;--green-600:#1e9b6a;--green-500:#28b87f;--green-400:#5cd3a2;--green-200:#bcf5de;--green-50:#e6faf1;--gold:#d4a843;--gold-light:#f0d68a;--cream:#faf6ef;--dark:#1a1a2e;--text:#2d3436;--text-light:#636e72;--white:#fff;--shadow:0 4px 24px rgba(0,0,0,0.08);--shadow-lg:0 12px 40px rgba(0,0,0,0.12);--radius:12px;--radius-lg:20px;--header-h:70px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:var(--header-h)}
+
+/* ── HEADER ── */
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--white);z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.06);transition:transform .3s}
+.header-inner{max-width:1400px;margin:0 auto;padding:0 16px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.header-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex-shrink:0}
+.header-logo img{height:42px;width:auto;border-radius:8px;flex-shrink:0}
+.header-logo-text h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--green-800);line-height:1.15;white-space:nowrap}
+.header-logo-text p{font-size:10px;color:var(--text-light);letter-spacing:0.3px;white-space:nowrap}
+.header-nav{display:flex;align-items:center;gap:6px}
+.header-nav a{text-decoration:none;color:var(--text);font-size:13px;font-weight:500;transition:all .2s;position:relative;padding:8px 12px;border-radius:8px}
+.header-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.header-nav a.active{color:var(--green-700);font-weight:600}
+.header-nav a.active::after{content:'';position:absolute;bottom:2px;left:12px;right:12px;height:2px;background:var(--green-600)}
+.mobile-toggle{display:none;background:none;border:none;font-size:22px;color:var(--green-700);cursor:pointer;padding:10px;min-width:44px;min-height:44px}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{max-width:1400px;margin:0 auto;padding:12px 20px;font-size:13px;color:var(--text-light)}
+.breadcrumb a{color:var(--green-600);text-decoration:none}
+.breadcrumb span{margin:0 6px;color:#ccc}
+
+/* ── PAGE HEADER ── */
+.page-header{background:linear-gradient(135deg,var(--green-800),var(--green-700));padding:50px 20px;text-align:center;color:var(--white)}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:8px}
+.page-header h1 span{color:var(--gold)}
+.page-header p{font-size:1rem;color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto}
+
+/* ── CONTACT GRID ── */
+.contact-section{max-width:1400px;margin:0 auto;padding:50px 20px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.contact-info-card,.contact-form-card{background:var(--white);border-radius:var(--radius-lg);padding:36px;box-shadow:var(--shadow)}
+.contact-info-card h2,.contact-form-card h2{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2vw,1.6rem);color:var(--green-800);margin-bottom:20px}
+.contact-info-card h2 span{color:var(--gold)}
+.contact-detail{display:flex;gap:16px;margin-bottom:22px;align-items:flex-start}
+.contact-detail .icon{width:44px;height:44px;min-width:44px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;color:var(--green-600);font-size:16px}
+.contact-detail h4{font-size:14px;color:var(--text);margin-bottom:3px}
+.contact-detail p{font-size:13px;color:var(--text-light);line-height:1.5}
+.contact-detail .hours-row{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--text-light);padding:4px 0}
+.contact-detail .hours-row .day{font-weight:500;color:var(--text)}
+.contact-detail .hours-row .time{text-align:right}
+.contact-detail .hours-row.closed .time{color:#e17055;font-weight:500}
+.contact-social{margin-top:12px;display:flex;gap:10px}
+.contact-social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--green-50);color:var(--green-600);font-size:18px;text-decoration:none;transition:all .3s}
+.contact-social a:hover{background:var(--green-600);color:var(--white);transform:translateY(-2px)}
+
+/* ── CONTACT FORM ── */
+.contact-form .form-group{margin-bottom:18px}
+.contact-form label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.contact-form input,.contact-form select,.contact-form textarea{width:100%;padding:12px 16px;border:1.5px solid #e0e0e0;border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:14px;color:var(--text);background:var(--cream);transition:border-color .3s,box-shadow .3s;outline:none;-webkit-appearance:none;appearance:none}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{border-color:var(--green-500);box-shadow:0 0 0 3px rgba(40,184,127,0.15)}
+.contact-form textarea{resize:vertical;min-height:120px}
+.contact-form select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23636e72' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.contact-form .submit-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 28px;background:var(--green-600);color:var(--white);border:none;border-radius:50px;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;min-height:48px}
+.contact-form .submit-btn:hover{background:var(--green-700);transform:translateY(-2px);box-shadow:var(--shadow)}
+.contact-form .submit-btn i{font-size:14px}
+.form-note{font-size:12px;color:var(--text-light);text-align:center;margin-top:12px}
+
+/* ── MAP SECTION ── */
+.map-section{max-width:1400px;margin:0 auto;padding:0 20px 50px}
+.map-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.8rem);color:var(--green-800);text-align:center;margin-bottom:24px}
+.map-section h2 span{color:var(--gold)}
+.map-wrapper{position:relative;width:100%;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:16/7}
+.map-wrapper iframe{width:100%;height:100%;border:0;position:absolute;top:0;left:0}
+.map-placeholder{width:100%;height:100%;position:absolute;top:0;left:0;background:var(--green-50);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--green-700);font-size:14px;text-align:center;padding:20px;gap:8px}
+.map-placeholder i{font-size:42px;color:var(--green-400);margin-bottom:4px}
+.map-placeholder p{max-width:320px;line-height:1.6}
+
+/* ── FAQ SECTION ── */
+.faq-section{background:var(--white);padding:60px 20px}
+.faq-inner{max-width:800px;margin:0 auto}
+.faq-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.8rem);color:var(--green-800);text-align:center;margin-bottom:8px}
+.faq-section h2 span{color:var(--gold)}
+.faq-section .faq-sub{text-align:center;font-size:14px;color:var(--text-light);margin-bottom:32px}
+.faq-item{border:1px solid #e8e8e8;border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:box-shadow .3s}
+.faq-item:hover{box-shadow:var(--shadow)}
+.faq-question{width:100%;background:var(--cream);border:none;padding:18px 20px;text-align:left;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;transition:background .3s}
+.faq-question:hover{background:var(--green-50)}
+.faq-question .faq-icon{flex-shrink:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--green-600);transition:transform .3s}
+.faq-item.open .faq-question .faq-icon{transform:rotate(45deg)}
+.faq-answer{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.faq-item.open .faq-answer{max-height:300px;padding:0 20px 18px}
+.faq-answer p{font-size:14px;color:var(--text-light);line-height:1.7}
+.faq-answer ul{list-style:none;padding:0;margin-top:8px}
+.faq-answer ul li{font-size:13px;color:var(--text-light);padding:4px 0;padding-left:18px;position:relative}
+.faq-answer ul li::before{content:'\f0c8';font-family:'Font Awesome 6 Free';font-weight:400;position:absolute;left:0;top:4px;font-size:10px;color:var(--green-500)}
+
+/* ── FOOTER ── */
+.footer{background:var(--green-900);padding:50px 20px 24px;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.footer h4{color:var(--white);font-size:14px;margin-bottom:14px;font-weight:600}
+.footer a{display:block;color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;padding:4px 0}
+.footer a:hover{color:var(--gold)}
+.footer p{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.7}
+.footer-bottom{max-width:1400px;margin:32px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;font-size:12px;color:rgba(255,255,255,0.4)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .mobile-toggle{display:flex;align-items:center;justify-content:center}
+  .header-nav{position:fixed;top:var(--header-h);left:0;right:0;background:var(--white);flex-direction:column;padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom,16px));box-shadow:var(--shadow-lg);transform:translateY(-110%);opacity:0;pointer-events:none;transition:all .3s ease;gap:2px}
+  .header-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .header-nav a{display:block;padding:12px 8px;font-size:15px;width:100%;border-radius:8px;min-height:44px}
+  .header-nav a.active::after{display:none}
+  .header-nav a.active{background:var(--green-50)}
+  .page-header{padding:36px 16px}
+  .contact-grid{grid-template-columns:1fr;gap:28px}
+  .contact-info-card,.contact-form-card{padding:28px 20px}
+  .map-wrapper{aspect-ratio:16/9}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .faq-section{padding:40px 16px}
+}
+@media(max-width:480px){
+  .header-logo img{height:34px}
+  .header-logo-text h1{font-size:15px}
+  .header-logo-text p{font-size:9px}
+  .contact-section{padding:30px 14px}
+  .contact-info-card,.contact-form-card{padding:22px 16px}
+  .contact-detail{gap:12px}
+  .contact-detail .icon{width:40px;height:40px;min-width:40px;font-size:14px}
+  .map-section{padding:0 14px 30px}
+  .map-wrapper{aspect-ratio:4/3}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+  .faq-section{padding:32px 14px}
+  .faq-question{font-size:13px;padding:14px 16px;min-height:48px}
+  .faq-answer p{font-size:13px}
+}
+@media(max-width:380px){
+  .header-logo img{height:30px}
+  .header-logo-text h1{font-size:13px}
+  .header-logo-text p{font-size:8px}
+  .page-header h1{font-size:1.4rem}
+  .page-header{padding:28px 12px}
+  .breadcrumb{padding:10px 14px;font-size:12px}
+  .contact-grid{gap:20px}
+  .contact-info-card h2,.contact-form-card h2{font-size:1.1rem}
+  .contact-form input,.contact-form select,.contact-form textarea{padding:10px 12px;font-size:13px;min-height:44px}
+  .contact-form .submit-btn{font-size:14px;padding:12px 20px;min-height:44px}
+  .map-section h2{font-size:1.1rem}
+  .faq-section h2{font-size:1.1rem}
+  .faq-question{font-size:12px;padding:12px 14px;min-height:44px}
+  .contact-social a{width:40px;height:40px;font-size:16px}
+  .contact-form textarea{min-height:100px}
+  .footer p{font-size:12px}
+  .footer a{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img src="images/logo-storefront.jpg" alt="Eden Groceries Logo">
+      <div class="header-logo-text">
+        <h1>Eden Groceries</h1>
+        <p>African &amp; Caribbean</p>
+      </div>
+    </a>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <nav class="header-nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="cart.html"><i class="fas fa-shopping-basket"></i> Cart <span class="cart-count" id="navCartCount" style="position:relative;top:-6px;font-size:9px;background:var(--gold);color:var(--white);width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-left:2px">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span>Contact</div>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Get in <span>Touch</span></h1>
+  <p>We'd love to hear from you! Whether you have a question about our products, want to place a special order, or just want to say hello — reach out any time.</p>
+</section>
+
+<!-- CONTACT GRID -->
+<section class="contact-section">
+  <div class="contact-grid">
+
+    <!-- LEFT: Contact Information -->
+    <div class="contact-info-card">
+      <h2>Contact <span>Information</span></h2>
+
+      <div class="contact-detail">
+        <div class="icon"><i class="fas fa-clock"></i></div>
+        <div>
+          <h4>Store Hours</h4>
+          <div class="hours-row">
+            <span class="day">Mon – Fri</span>
+            <span class="time">10:00 AM – 8:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="day">Saturday</span>
+            <span class="time">10:00 AM – 6:00 PM</span>
+          </div>
+          <div class="hours-row closed">
+            <span class="day">Sunday</span>
+            <span class="time">Closed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="icon"><i class="fas fa-phone-alt"></i></div>
+        <div>
+          <h4>Phone</h4>
+          <p><a href="tel:+1705796...." style="color:var(--green-600);text-decoration:none;font-weight:500">(705) 796-....</a></p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="icon"><i class="fas fa-location-dot"></i></div>
+        <div>
+          <h4>Location</h4>
+          <p>Barrie, Ontario, Canada</p>
+          <p style="font-size:12px;margin-top:2px;color:var(--green-600)">Proudly serving Simcoe County</p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <div class="icon"><i class="fab fa-instagram"></i></div>
+        <div>
+          <h4>Follow Us</h4>
+          <p><a href="https://www.instagram.com/shopfest_inc/" target="_blank" style="color:var(--green-600);text-decoration:none;font-weight:500">@shopfest_inc</a></p>
+        </div>
+      </div>
+
+      <div class="contact-social">
+        <a href="https://www.instagram.com/shopfest_inc/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:shopfestinc@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Contact Form -->
+    <div class="contact-form-card">
+      <h2>Send Us a <span>Message</span></h2>
+      <form class="contact-form" id="contactForm" action="mailto:shopfestinc@gmail.com" method="post" enctype="text/plain">
+        <div class="form-group">
+          <label for="name">Full Name <span style="color:#e17055">*</span></label>
+          <input type="text" id="name" name="name" placeholder="e.g. Jane Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address <span style="color:#e17055">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(705) 555-0123">
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject <span style="color:#e17055">*</span></label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Select a subject</option>
+            <option value="General Inquiry">General Inquiry</option>
+            <option value="Product Availability">Product Availability</option>
+            <option value="Special Order">Special Order</option>
+            <option value="Delivery Question">Delivery Question</option>
+            <option value="Wholesale">Wholesale / Bulk Order</option>
+            <option value="Feedback">Feedback / Suggestion</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message <span style="color:#e17055">*</span></label>
+          <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <p class="form-note">We typically respond within 24 hours during business hours.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<section class="map-section">
+  <h2>Find Us in <span>Barrie</span></h2>
+  <div class="map-wrapper">
+    <div class="map-placeholder" id="mapPlaceholder">
+      <i class="fas fa-map-marked-alt"></i>
+      <p><strong>Eden African &amp; Caribbean Groceries</strong><br>Barrie, Ontario</p>
+      <p style="font-size:12px;color:var(--text-light)">Map will load here with Google Maps integration.<br>Check back soon for directions.</p>
+    </div>
+    <iframe
+      id="mapIframe"
+      src="about:blank"
+      data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d181838.5124884921!2d-79.7319032!3d44.3899889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882bf3f68f7f8f6d%3A0x8e0f3f2f8f7f8f6d!2sBarrie%2C%20ON!5e0!3m2!1sen!2sca!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Google Maps location of Eden Groceries in Barrie, Ontario"
+      style="display:none"
+    ></iframe>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <h2>Frequently Asked <span>Questions</span></h2>
+    <p class="faq-sub">Got questions? We've got answers. Here are some of the most common things customers ask us.</p>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>How do I place an order?</span>
+        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+      </button>
+      <div class="faq-answer">
+        <p>Ordering is easy! You can place an order online through our Shop page, or visit us in-store at our Barrie location. To order online, simply browse our selection, add items to your cart, and proceed to checkout. You'll be able to choose between convenient in-store pickup or local delivery.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What areas do you deliver to?</span>
+        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+      </button>
+      <div class="faq-answer">
+        <p>We currently offer delivery within Barrie and the surrounding Simcoe County area, including:</p>
+        <ul>
+          <li>Barrie city limits</li>
+          <li>Innisfil &amp; Alcona</li>
+          <li>Midhurst &amp; Minesing</li>
+          <li>Springwater &amp; Oro-Medonte</li>
+        </ul>
+        <p style="margin-top:8px">Delivery is available Tuesday through Saturday. Minimum order of $25 applies. Contact us if you're outside our regular delivery zone — we may be able to accommodate special arrangements!</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What payment methods do you accept?</span>
+        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+      </button>
+      <div class="faq-answer">
+        <p>We accept a variety of payment methods to make your shopping experience as convenient as possible:</p>
+        <ul>
+          <li>Visa, Mastercard, and American Express</li>
+          <li>Interac Debit and Credit</li>
+          <li>Cash (in-store only)</li>
+          <li>Interac e-Transfer (for delivery orders)</li>
+          <li>Google Pay and Apple Pay</li>
+        </ul>
+        <p style="margin-top:8px">All online payments are processed securely through our checkout system.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Can I place a special or bulk order?</span>
+        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+      </button>
+      <div class="faq-answer">
+        <p>Absolutely! We welcome special orders and bulk purchases. Whether you need a large quantity of a specific product for an event, or you're looking for something we don't regularly stock, we'll do our best to source it for you. Just fill out the contact form above or give us a call at (705) 796-.... with details about what you need, and we'll get back to you with availability and pricing.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>What is your return policy?</span>
+        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+      </button>
+      <div class="faq-answer">
+        <p>Your satisfaction is our priority. If you're not happy with a purchase, let us know within 48 hours and we'll make it right. Perishable items must be returned same day. Non-perishable items in original condition can be exchanged or refunded within 7 days of purchase. Please bring your receipt or order confirmation when requesting a return.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Do you carry halal products?</span>
+        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes! We stock a selection of halal-certified meat and poultry products. Our halal items are clearly labelled in-store and on our online shop. Availability varies, so if you're looking for something specific, feel free to contact us and we'll let you know what's currently in stock or when the next shipment arrives.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span>Do you offer gift cards?</span>
+        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, we offer gift cards that can be purchased in-store or online! They make the perfect gift for friends and family who love African and Caribbean flavours. Gift cards can be redeemed for any products in our store. Contact us for available denominations or to order a custom amount.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--green-700),var(--green-500));border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:var(--white);font-size:20px;font-weight:700;font-family:'Playfair Display',serif">E</div>
+      <p>Eden African &amp; Caribbean Groceries brings the authentic flavours of home to Barrie, Ontario.</p>
+    </div>
+    <div><h4>Pages</h4><a href="index.html">Home</a><a href="shop.html">Shop All</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="cart.html">Cart</a></div>
+    <div><h4>Categories</h4><a href="shop.html?cat=Fresh+Produce">Fresh Produce</a><a href="shop.html?cat=Spices+%26+Seasonings">Spices</a><a href="shop.html?cat=Frozen+Fish+%26+Meat">Frozen Fish</a><a href="shop.html?cat=Rice+%26+Grains">Rice &amp; Grains</a><a href="shop.html?cat=Bakery+%26+Snacks">Bakery</a><a href="shop.html?cat=Beverages">Beverages</a></div>
+    <div><h4>Contact</h4><p>Barrie, Ontario</p><p>(705) 796-....</p><p>Mon-Fri: 10AM-8PM | Sat: 10AM-6PM</p><p style="margin-top:12px"><a href="https://www.instagram.com/shopfest_inc/" target="_blank" style="display:inline"><i class="fab fa-instagram"></i> @shopfest_inc</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 Eden African &amp; Caribbean Groceries. All rights reserved. | Barrie, Ontario</p></div>
+</footer>
+
+<script>
+// ── CART COUNT ──
+(function updateCartCount(){
+  try {
+    var cart = JSON.parse(localStorage.getItem('edenCart') || '[]');
+    var count = cart.reduce(function(sum, item){ return sum + (item.qty || 0); }, 0);
+    document.getElementById('navCartCount').textContent = count;
+  } catch(e){}
+})();
+
+// ── MOBILE MENU ──
+(function initMobileMenu(){
+  var toggle = document.getElementById('mobileToggle');
+  var nav = document.getElementById('nav');
+  if(!toggle || !nav) return;
+  toggle.addEventListener('click', function(){
+    nav.classList.toggle('open');
+  });
+  function closeMobileMenu(){ nav.classList.remove('open'); }
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 768) closeMobileMenu();
+  });
+  // Close menu when a nav link is clicked
+  var links = nav.querySelectorAll('a');
+  for(var i = 0; i < links.length; i++){
+    links[i].addEventListener('click', function(){
+      if(window.innerWidth <= 768) closeMobileMenu();
+    });
+  }
+})();
+
+// ── FAQ ACCORDION ──
+(function initFAQ(){
+  var items = document.querySelectorAll('.faq-item');
+  for(var i = 0; i < items.length; i++){
+    var question = items[i].querySelector('.faq-question');
+    (function(item, btn){
+      btn.addEventListener('click', function(){
+        var isOpen = item.classList.contains('open');
+        // Close all other items
+        for(var j = 0; j < items.length; j++){
+          items[j].classList.remove('open');
+          items[j].querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        }
+        // Toggle this one
+        if(!isOpen){
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    })(items[i], question);
+  }
+})();
+
+// ── LAZY MAP LOAD ──
+(function lazyMap(){
+  var wrapper = document.querySelector('.map-wrapper');
+  var placeholder = document.getElementById('mapPlaceholder');
+  var iframe = document.getElementById('mapIframe');
+  if(!wrapper || !iframe) return;
+  var loaded = false;
+  function loadMap(){
+    if(loaded) return;
+    loaded = true;
+    if(placeholder) placeholder.style.display = 'none';
+    iframe.style.display = 'block';
+    iframe.src = iframe.getAttribute('data-src');
+  }
+  // Load on scroll, or immediately if already scrolled past
+  var observer = new IntersectionObserver(function(entries){
+    for(var i = 0; i < entries.length; i++){
+      if(entries[i].isIntersecting){ loadMap(); observer.disconnect(); }
+    }
+  }, { rootMargin: '200px' });
+  observer.observe(wrapper);
+  // Fallback: load after 3s regardless
+  setTimeout(loadMap, 3000);
+})();
+
+// ── FORM HANDLER ──
+(function initForm(){
+  var form = document.getElementById('contactForm');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var subject = document.getElementById('subject').value;
+    var message = document.getElementById('message').value.trim();
+    if(!name || !email || !subject || !message){
+      e.preventDefault();
+      alert('Please fill in all required fields before sending.');
+      return;
+    }
+    // Allow the mailto: action to proceed
+  });
+})();
+</script>
+</body>
+</html>

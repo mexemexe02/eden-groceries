@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Shop — Eden African & Caribbean Groceries | Barrie, ON</title>
+<meta name="description" content="Browse our full selection of African and Caribbean groceries in Barrie. Fresh produce, spices, frozen fish, rice, bakery, beverages & more. Order online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green-900:#0a3d2b;--green-800:#0f5a3e;--green-700:#167a54;--green-600:#1e9b6a;
+  --green-500:#28b87f;--green-400:#5cd3a2;--green-300:#8fe6c2;--green-200:#bcf5de;
+  --green-50:#e6faf1;--gold:#d4a843;--gold-light:#f0d68a;--cream:#faf6ef;
+  --dark:#1a1a2e;--text:#2d3436;--text-light:#636e72;--white:#fff;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);--shadow-lg:0 12px 40px rgba(0,0,0,0.12);
+  --radius:12px;--radius-lg:20px;--header-h:70px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:var(--header-h)}
+
+/* ── HEADER ── */
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--white);z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.06);transition:transform .3s}
+.header-inner{max-width:1400px;margin:0 auto;padding:0 16px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.header-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex-shrink:0}
+.header-logo img{height:42px;width:auto;border-radius:8px;flex-shrink:0}
+.header-logo-text h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--green-800);line-height:1.15;white-space:nowrap}
+.header-logo-text p{font-size:10px;color:var(--text-light);letter-spacing:0.3px;white-space:nowrap}
+.header-nav{display:flex;align-items:center;gap:6px}
+.header-nav a,.header-nav button{text-decoration:none;color:var(--text);font-size:13px;font-weight:500;transition:all .2s;position:relative;padding:8px 12px;border-radius:8px;background:none;border:none;cursor:pointer;font-family:inherit}
+.header-nav a:hover,.header-nav button:hover{background:var(--green-50);color:var(--green-700)}
+.header-nav a.active,.header-nav button.active{color:var(--green-700);font-weight:600}
+.header-nav a.active::after{content:'';position:absolute;bottom:2px;left:12px;right:12px;height:2px;background:var(--green-600)}
+.cart-btn{position:relative}
+.cart-count{position:absolute;top:-2px;right:-2px;background:var(--gold);color:var(--white);font-size:9px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.mobile-toggle{display:none;background:none;border:none;font-size:22px;color:var(--green-700);cursor:pointer;padding:10px;min-width:44px;min-height:44px}
+
+/* ── PAGE HEADER ── */
+.page-header{background:linear-gradient(135deg,var(--green-800),var(--green-700));padding:40px 20px;text-align:center;color:var(--white)}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:6px}
+.page-header h1 span{color:var(--gold)}
+.page-header p{font-size:0.95rem;color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto}
+.breadcrumb{max-width:1400px;margin:0 auto;padding:12px 20px;font-size:13px;color:var(--text-light)}
+.breadcrumb a{color:var(--green-600);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb span{margin:0 6px;color:#ccc}
+
+/* ── SHOP LAYOUT ── */
+.shop-layout{max-width:1400px;margin:0 auto;padding:24px 20px 60px;display:grid;grid-template-columns:260px 1fr;gap:28px}
+.shop-sidebar{position:sticky;top:calc(var(--header-h) + 20px);align-self:start}
+.sidebar-section{background:var(--white);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.sidebar-section h3{font-size:14px;color:var(--green-800);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--green-50)}
+.filter-group{margin-bottom:10px}
+.filter-group label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer;padding:6px 0;transition:color .2s}
+.filter-group label:hover{color:var(--green-700)}
+.filter-group input[type=checkbox]{width:16px;height:16px;accent-color:var(--green-600);cursor:pointer;flex-shrink:0}
+.filter-group .count{color:var(--text-light);font-size:11px;margin-left:auto}
+
+/* ── SHOP TOOLBAR ── */
+.shop-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.shop-toolbar .result-count{font-size:14px;color:var(--text-light)}
+.shop-toolbar .result-count strong{color:var(--text)}
+.search-bar{flex:1;max-width:400px;position:relative}
+.search-bar input{width:100%;padding:12px 16px 12px 40px;border:1.5px solid #e0e0e0;border-radius:50px;font-size:14px;font-family:'Inter',sans-serif;transition:all .2s;background:var(--white)}
+.search-bar input:focus{outline:none;border-color:var(--green-600);box-shadow:0 0 0 3px rgba(30,155,106,0.1)}
+.search-bar i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-light)}
+.sort-select{padding:10px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;background:var(--white);cursor:pointer}
+
+/* ── PRODUCTS GRID ── */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.product-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all .3s;position:relative;display:flex;flex-direction:column}
+.product-card:active{transform:scale(0.98)}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.product-card .badge{position:absolute;top:8px;left:8px;z-index:2;background:var(--gold);color:var(--white);font-size:9px;font-weight:600;padding:3px 8px;border-radius:4px}
+.product-card .badge.sale{background:#e74c3c}
+.product-card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .4s;display:block}
+.product-card:hover img{transform:scale(1.05)}
+.product-info{padding:12px 14px 16px;flex:1;display:flex;flex-direction:column}
+.product-info h4{font-size:13px;color:var(--text);margin-bottom:3px;line-height:1.3}
+.product-info .origin{font-size:11px;color:var(--text-light);margin-bottom:6px}
+.product-info .price{font-size:16px;font-weight:600;color:var(--green-700);margin-bottom:auto;padding-bottom:8px}
+.product-info .price .unit{font-size:11px;font-weight:400;color:var(--text-light)}
+.product-info .price .was{font-size:12px;font-weight:400;color:var(--text-light);text-decoration:line-through;margin-left:6px}
+.add-to-cart{width:100%;padding:10px 8px;background:var(--green-50);border:1px solid var(--green-200);border-radius:8px;color:var(--green-700);font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px;font-family:'Inter',sans-serif}
+.add-to-cart:hover{background:var(--green-600);color:var(--white);border-color:var(--green-600)}
+
+/* ── SIDEBAR TOGGLE (mobile) ── */
+.sidebar-toggle{display:none;width:100%;padding:12px;background:var(--white);border:1.5px solid var(--green-200);border-radius:8px;color:var(--green-700);font-size:14px;font-weight:500;cursor:pointer;margin-bottom:16px;font-family:'Inter',sans-serif;text-align:center;gap:8px}
+.sidebar-toggle i{transition:transform .3s}
+
+/* ── FOOTER ── */
+.footer{background:var(--green-900);padding:50px 20px 24px;margin-top:60px}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.footer h4{color:var(--white);font-size:14px;margin-bottom:14px;font-weight:600}
+.footer a{display:block;color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;padding:4px 0}
+.footer a:hover{color:var(--gold)}
+.footer p{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.7}
+.footer-brand .logo-icon{margin-bottom:10px}
+.footer-bottom{max-width:1400px;margin:32px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;font-size:12px;color:rgba(255,255,255,0.4)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .shop-layout{grid-template-columns:1fr}
+  .shop-sidebar{display:none;position:static}
+  .shop-sidebar.open{display:block}
+  .sidebar-toggle{display:flex;align-items:center;justify-content:center}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .mobile-toggle{display:flex;align-items:center;justify-content:center}
+  .header-nav{position:fixed;top:var(--header-h);left:0;right:0;background:var(--white);flex-direction:column;padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom,16px));box-shadow:var(--shadow-lg);transform:translateY(-110%);opacity:0;pointer-events:none;transition:all .3s ease;gap:2px}
+  .header-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .header-nav a,.header-nav button{display:block;padding:12px 8px;font-size:15px;width:100%;border-radius:8px}
+  .header-nav a.active::after{display:none}
+  .header-nav a.active,.header-nav button.active{background:var(--green-50)}
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .shop-toolbar{flex-direction:column;align-items:stretch}
+  .search-bar{max-width:100%}
+  .page-header{padding:32px 16px}
+}
+
+@media(max-width:480px){
+  .products-grid{gap:10px}
+  .product-card img{aspect-ratio:4/3}
+  .product-info{padding:10px 10px 12px}
+  .product-info h4{font-size:12px}
+  .product-info .origin{font-size:10px}
+  .product-info .price{font-size:14px}
+  .add-to-cart{font-size:11px;padding:8px;min-height:36px}
+  .shop-layout{padding:16px 12px 40px}
+  .header-logo img{height:34px}
+  .header-logo-text h1{font-size:15px}
+  .header-logo-text p{font-size:9px}
+  .header-nav a,.header-nav button{font-size:14px}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:380px){
+  .products-grid{grid-template-columns:1fr;gap:12px}
+  .header-logo-text h1{font-size:13px}
+  .header-logo-text p{font-size:8px}
+  .header-logo img{height:30px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img src="images/logo-storefront.jpg" alt="Eden Groceries Logo">
+      <div class="header-logo-text">
+        <h1>Eden Groceries</h1>
+        <p>African &amp; Caribbean</p>
+      </div>
+    </a>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <nav class="header-nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html"><i class="fas fa-shopping-basket"></i> Cart <span class="cart-count" id="navCartCount">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span>Shop</div>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Our <span>Products</span></h1>
+  <p>Browse our full selection of African and Caribbean groceries — fresh produce, authentic spices, frozen fish, bakery, beverages, and cooking essentials.</p>
+</section>
+
+<!-- SHOP -->
+<section class="shop-layout">
+  <!-- Sidebar Filters -->
+  <aside class="shop-sidebar" id="shopSidebar">
+    <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="fas fa-times"></i> Close Filters</button>
+    
+    <div class="sidebar-section">
+      <h3><i class="fas fa-search" style="margin-right:6px;font-size:12px"></i> Search</h3>
+      <div class="search-bar" style="max-width:100%">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="applyFilters()" style="padding:10px 12px 10px 32px;font-size:13px">
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3><i class="fas fa-layer-group" style="margin-right:6px;font-size:12px"></i> Category</h3>
+      <div class="filter-group" id="categoryFilters"></div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3><i class="fas fa-tag" style="margin-right:6px;font-size:12px"></i> Quick Filters</h3>
+      <div class="filter-group">
+        <label><input type="checkbox" id="filterBestsellers" onchange="applyFilters()"> Bestsellers<span class="count"></span></label>
+        <label><input type="checkbox" id="filterOnSale" onchange="applyFilters()"> On Sale<span class="count"></span></label>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3><i class="fas fa-globe-americas" style="margin-right:6px;font-size:12px"></i> Origin</h3>
+      <div class="filter-group" id="originFilters"></div>
+    </div>
+
+    <button class="sidebar-toggle" onclick="clearFilters()" style="border-color:#e74c3c;color:#e74c3c;margin-top:0"><i class="fas fa-undo"></i> Clear All Filters</button>
+  </aside>
+
+  <!-- Products Area -->
+  <div>
+    <button class="sidebar-toggle" id="mobileFilterBtn" onclick="toggleSidebar()"><i class="fas fa-sliders-h"></i> Filters &amp; Search</button>
+
+    <div class="shop-toolbar">
+      <div class="result-count">Showing <strong id="resultCount">0</strong> products</div>
+      <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+        <option value="default">Sort: Default</option>
+        <option value="name-asc">Name: A–Z</option>
+        <option value="name-desc">Name: Z–A</option>
+        <option value="price-asc">Price: Low–High</option>
+        <option value="price-desc">Price: High–Low</option>
+      </select>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+    <div id="noResults" style="display:none;text-align:center;padding:60px 20px;color:var(--text-light)">
+      <i class="fas fa-search" style="font-size:48px;color:var(--green-200);margin-bottom:16px;display:block"></i>
+      <p style="font-size:16px;font-weight:500;color:var(--text);margin-bottom:6px">No products found</p>
+      <p>Try a different search term or clear your filters.</p>
+      <button class="sidebar-toggle" onclick="clearFilters()" style="display:inline-flex;width:auto;margin-top:16px;padding:10px 24px"><i class="fas fa-undo"></i> Clear Filters</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--green-700),var(--green-500));border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:var(--white);font-size:20px;font-weight:700;font-family:'Playfair Display',serif">E</div>
+      <p>Eden African &amp; Caribbean Groceries brings the authentic flavours of home to Barrie, Ontario. Fresh produce, spices, frozen goods, and more — order online for pickup or delivery.</p>
+    </div>
+    <div><h4>Pages</h4><a href="index.html">Home</a><a href="shop.html">Shop All</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="cart.html">Cart</a></div>
+    <div><h4>Categories</h4><a href="shop.html?cat=Fresh+Produce">Fresh Produce</a><a href="shop.html?cat=Spices+%26+Seasonings">Spices &amp; Seasonings</a><a href="shop.html?cat=Frozen+Fish+%26+Meat">Frozen Fish &amp; Meat</a><a href="shop.html?cat=Rice+%26+Grains">Rice &amp; Grains</a><a href="shop.html?cat=Bakery+%26+Snacks">Bakery &amp; Snacks</a><a href="shop.html?cat=Beverages">Beverages</a></div>
+    <div><h4>Contact</h4><p>Barrie, Ontario</p><p>(705) 796-....</p><p>Mon-Fri: 10AM-8PM | Sat: 10AM-6PM</p><p style="margin-top:12px"><a href="https://www.instagram.com/shopfest_inc/" target="_blank" style="display:inline"><i class="fab fa-instagram"></i> @shopfest_inc</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 Eden African &amp; Caribbean Groceries. All rights reserved. | Barrie, Ontario</p></div>
+</footer>
+
+<script>
+// ── PRODUCT DATA ──
+const products = [
+  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80',best:true,desc:'Premium Jamaican yams — starchy, earthy, perfect for boiling, frying or roasting.'},
+  {name:'Green Plantains',cat:'Fresh Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://images.unsplash.com/photo-1563379092-713a12b607dd?w=400&q=80',best:false,desc:'Firm green plantains ideal for tostones, mofongo, or frying into chips.'},
+  {name:'Cassava (Yuca)',cat:'Fresh Produce',origin:'Costa Rica',price:3.49,unit:'lb',img:'https://images.unsplash.com/photo-1584486181114-3ba447e2d40b?w=400&q=80',best:false,desc:'Fresh cassava root — boil, fry, or mash. A staple across Africa and the Caribbean.'},
+  {name:'Fresh Coconut',cat:'Fresh Produce',origin:'Jamaica',price:2.99,unit:'each',img:'https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=400&q=80',best:false,desc:'Young green coconuts with sweet water inside.'},
+  {name:'Okra',cat:'Fresh Produce',origin:'Honduras',price:2.99,unit:'lb',img:'https://images.unsplash.com/photo-1425543103980-d7e58c6aa38c?w=400&q=80',best:false,desc:'Fresh okra pods — essential for soups, stews, and gumbo.'},
+  {name:'Scotch Bonnet Peppers',cat:'Spices & Seasonings',origin:'Trinidad',price:4.99,unit:'pack',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80',best:true,desc:'Fiery scotch bonnet peppers — the heart of Caribbean heat.'},
+  {name:'Ogbono Seeds',cat:'Spices & Seasonings',origin:'Nigeria',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1596040033229-982a0d3c2d5e?w=400&q=80',best:false,desc:'Ground ogbono seeds — the traditional thickener for Nigerian ogbono soup.'},
+  {name:'Jerk Seasoning',cat:'Spices & Seasonings',origin:'Jamaica',price:6.99,unit:'jar',img:'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=400&q=80',best:true,desc:'Traditional Jamaican jerk seasoning.'},
+  {name:'Curry Powder',cat:'Spices & Seasonings',origin:'Trinidad',price:4.49,unit:'pack',img:'https://images.unsplash.com/photo-1591099441548-47d9a442b6b8?w=400&q=80',best:false,desc:'Trinidad-style curry powder for doubles, curry chicken, and goat.'},
+  {name:'Frozen Mackerel',cat:'Frozen Fish & Meat',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&q=80',best:true,desc:'Whole frozen mackerel — rich, oily fish for steaming, frying, or grilling.'},
+  {name:'Frozen Tilapia',cat:'Frozen Fish & Meat',origin:'Honduras',price:6.49,unit:'lb',img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80',best:false,desc:'Whole frozen tilapia — mild, flaky white fish for frying or baking.'},
+  {name:'Frozen Snapper',cat:'Frozen Fish & Meat',origin:'Guyana',price:9.99,unit:'lb',img:'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=400&q=80',best:false,desc:'Red snapper — premium fish for special occasions.'},
+  {name:'Frozen Oxtail',cat:'Frozen Fish & Meat',origin:'Jamaica',price:11.99,unit:'lb',img:'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&q=80',best:true,desc:'Premium oxtail cuts — slow-cook for classic Jamaican oxtail stew.'},
+  {name:'Jasmine Rice 5lb',cat:'Rice & Grains',origin:'Thailand',price:8.99,unit:'bag',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80',best:false,desc:'Aromatic jasmine rice — the everyday rice for Caribbean kitchens.'},
+  {name:'Basmati Rice 5lb',cat:'Rice & Grains',origin:'India',price:9.99,unit:'bag',img:'https://images.unsplash.com/photo-1551044289-d0e98e9b53a2?w=400&q=80',best:false,desc:'Premium basmati rice — aromatic, light, separate grains.'},
+  {name:'Brown Rice 5lb',cat:'Rice & Grains',origin:'USA',price:7.49,unit:'bag',img:'https://images.unsplash.com/photo-1553532435-93d530a97bb1?w=400&q=80',best:false,desc:'Whole grain brown rice — nutritious, hearty, fibre-rich.'},
+  {name:'Fufu Flour',cat:'Rice & Grains',origin:'Ghana',price:5.99,unit:'pack',img:'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80',best:true,desc:'Traditional fufu flour — mix with water for smooth, stretchy fufu.'},
+  {name:'Hard Dough Bread',cat:'Bakery & Snacks',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',best:true,desc:'Traditional Jamaican hard dough bread — dense, slightly sweet.'},
+  {name:'Coconut Drops',cat:'Bakery & Snacks',origin:'Jamaica',price:3.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false,desc:'Sweet coconut drops — chewy, gingery, and utterly addictive.'},
+  {name:'Spice Buns',cat:'Bakery & Snacks',origin:'Jamaica',price:3.99,unit:'each',img:'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80',best:false,desc:'Aromatic Jamaican spice buns — dark, fruity, spiced with cinnamon.'},
+  {name:'Caribbean Sorrel',cat:'Beverages',origin:'Trinidad',price:3.99,unit:'bottle',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80',best:false,desc:'Traditional sorrel drink — hibiscus, spiced with ginger and cloves.'},
+  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&q=80',best:false,desc:'Fiery Jamaican ginger beer — real ginger kick.'},
+  {name:'Coconut Water',cat:'Beverages',origin:'Brazil',price:2.99,unit:'bottle',img:'https://images.unsplash.com/photo-1529693662653-9d480530a697?w=400&q=80',best:false,desc:'Pure coconut water — hydrating, natural electrolytes.'},
+  {name:'Mauby Drink',cat:'Beverages',origin:'Trinidad',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80',best:false,desc:'Traditional mauby — bark-based Caribbean drink.'},
+  {name:'Red Palm Oil',cat:'Cooking Ingredients',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80',best:true,desc:'Vibrant red palm oil — essential for West African cooking.'},
+  {name:'Coconut Milk',cat:'Cooking Ingredients',origin:'Thailand',price:3.99,unit:'can',img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80',best:false,desc:'Rich coconut milk — creamy base for curries, rice dishes, and sweets.'},
+  {name:'Cassava Flour',cat:'Cooking Ingredients',origin:'Brazil',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false,desc:'Fine cassava flour — gluten-free, perfect for baking and thickening.'},
+];
+
+// ── CART ──
+let cart = JSON.parse(localStorage.getItem('edenCart')||'[]');
+function saveCart(){localStorage.setItem('edenCart',JSON.stringify(cart));updateCartCount()}
+function updateCartCount(){
+  const c=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('navCartCount').textContent=c;
+}
+function quickAdd(i){
+  const p=products[i],existing=cart.find(item=>item.name===p.name);
+  if(existing){existing.qty++}else{cart.push({...p,qty:1})}
+  saveCart();
+  const btn=event.target.closest('.add-to-cart');
+  btn.innerHTML='<i class=\"fas fa-check\"></i> Added!';btn.style.background='var(--green-600)';btn.style.color='white';
+  setTimeout(()=>{btn.innerHTML='<i class=\"fas fa-plus\"></i> Add to Cart';btn.style.background='';btn.style.color=''},1200);
+}
+
+// ── CATEGORIES & ORIGINS ──
+const categoryNames = [...new Set(products.map(p=>p.cat))];
+const originNames = [...new Set(products.map(p=>p.origin))];
+
+// ── STATE ──
+let selectedCategories = new Set();
+let selectedOrigins = new Set();
+let searchQuery = '';
+let bestsellersOnly = false;
+let onSaleOnly = false;
+
+// ── RENDER FILTERS ──
+function renderFilters(){
+  // Category checkboxes
+  const catContainer=document.getElementById('categoryFilters');
+  catContainer.innerHTML=categoryNames.map(c=>{
+    const count=products.filter(p=>p.cat===c).length;
+    return `<label><input type="checkbox" value="${c}" onchange="toggleCategory('${c}')"> ${c}<span class="count">${count}</span></label>`;
+  }).join('');
+
+  // Origin checkboxes
+  const orgContainer=document.getElementById('originFilters');
+  orgContainer.innerHTML=originNames.map(o=>{
+    const count=products.filter(p=>p.origin===o).length;
+    return `<label><input type="checkbox" value="${o}" onchange="toggleOrigin('${o}')"> ${o}<span class="count">${count}</span></label>`;
+  }).join('');
+}
+
+function toggleCategory(cat){
+  if(selectedCategories.has(cat)) selectedCategories.delete(cat);
+  else selectedCategories.add(cat);
+  applyFilters();
+}
+function toggleOrigin(origin){
+  if(selectedOrigins.has(origin)) selectedOrigins.delete(origin);
+  else selectedOrigins.add(origin);
+  applyFilters();
+}
+
+// ── APPLY FILTERS ──
+function applyFilters(){
+  searchQuery=document.getElementById('searchInput').value.toLowerCase().trim();
+  bestsellersOnly=document.getElementById('filterBestsellers').checked;
+  onSaleOnly=document.getElementById('filterOnSale').checked;
+  
+  let filtered = products.filter(p=>{
+    // Search
+    if(searchQuery && !p.name.toLowerCase().includes(searchQuery) && !p.cat.toLowerCase().includes(searchQuery) && !p.origin.toLowerCase().includes(searchQuery)) return false;
+    // Category
+    if(selectedCategories.size>0 && !selectedCategories.has(p.cat)) return false;
+    // Origin
+    if(selectedOrigins.size>0 && !selectedOrigins.has(p.origin)) return false;
+    // Bestsellers
+    if(bestsellersOnly && !p.best) return false;
+    return true;
+  });
+
+  // Sort
+  const sort=document.getElementById('sortSelect').value;
+  if(sort==='name-asc') filtered.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sort==='name-desc') filtered.sort((a,b)=>b.name.localeCompare(a.name));
+  else if(sort==='price-asc') filtered.sort((a,b)=>a.price-b.price);
+  else if(sort==='price-desc') filtered.sort((a,b)=>b.price-a.price);
+
+  renderProducts(filtered);
+}
+
+// ── RENDER PRODUCTS ──
+function renderProducts(filtered){
+  const grid=document.getElementById('productsGrid');
+  const noRes=document.getElementById('noResults');
+  document.getElementById('resultCount').textContent=filtered.length;
+
+  if(!filtered.length){
+    grid.innerHTML='';
+    noRes.style.display='block';
+    return;
+  }
+  noRes.style.display='none';
+
+  grid.innerHTML=filtered.map((p,i)=>{
+    const globalIdx=products.indexOf(p);
+    return `<div class="product-card" onclick="location.href='cart.html?add=${globalIdx}'">
+      ${p.best?'<div class="badge">Bestseller</div>':''}
+      <img src="${p.img}" alt="${p.name}" loading="lazy" width="400" height="300">
+      <div class="product-info">
+        <h4>${p.name}</h4>
+        <div class="origin">${p.origin} · ${p.cat}</div>
+        <div class="price">$${p.price.toFixed(2)} <span class="unit">/ ${p.unit}</span></div>
+        <button class="add-to-cart" onclick="event.stopPropagation();quickAdd(${globalIdx})"><i class="fas fa-plus"></i> Add to Cart</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── SIDEBAR TOGGLE ──
+function toggleSidebar(){
+  document.getElementById('shopSidebar').classList.toggle('open');
+}
+
+// ── CLEAR FILTERS ──
+function clearFilters(){
+  selectedCategories.clear();
+  selectedOrigins.clear();
+  document.querySelectorAll('#categoryFilters input, #originFilters input').forEach(c=>c.checked=false);
+  document.getElementById('filterBestsellers').checked=false;
+  document.getElementById('filterOnSale').checked=false;
+  document.getElementById('searchInput').value='';
+  document.getElementById('sortSelect').value='default';
+  applyFilters();
+}
+
+// ── MOBILE MENU ──
+document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('nav').classList.toggle('open')});
+function closeMobileMenu(){document.getElementById('nav').classList.remove('open')}
+window.addEventListener('resize',()=>{if(window.innerWidth>768)closeMobileMenu()});
+
+// ── URL CATEGORY PRE-SELECT ──
+function loadUrlParams(){
+  const params=new URLSearchParams(window.location.search);
+  const catParam=params.get('cat');
+  if(catParam){
+    const dec=decodeURIComponent(catParam);
+    if(categoryNames.includes(dec)){
+      selectedCategories.add(dec);
+      document.querySelectorAll('#categoryFilters input').forEach(c=>{if(c.value===dec)c.checked=true});
+    }
+  }
+}
+
+// ── INIT ──
+loadUrlParams();
+renderFilters();
+applyFilters();
+updateCartCount();
+</script>
+</body>
+</html>

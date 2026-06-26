@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Cart — Eden African & Caribbean Groceries | Barrie, ON</title>
+<meta name="description" content="Review your cart at Eden African & Caribbean Groceries in Barrie. Secure checkout for pickup or delivery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green-900:#0a3d2b;--green-800:#0f5a3e;--green-700:#167a54;--green-600:#1e9b6a;
+  --green-500:#28b87f;--green-400:#5cd3a2;--green-300:#8fe6c2;--green-200:#bcf5de;
+  --green-50:#e6faf1;--gold:#d4a843;--gold-light:#f0d68a;--cream:#faf6ef;
+  --dark:#1a1a2e;--text:#2d3436;--text-light:#636e72;--white:#fff;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);--shadow-lg:0 12px 40px rgba(0,0,0,0.12);
+  --radius:12px;--radius-lg:20px;--header-h:70px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:var(--header-h)}
+
+/* ── HEADER ── */
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--white);z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.06);transition:transform .3s}
+.header-inner{max-width:1400px;margin:0 auto;padding:0 16px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.header-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex-shrink:0}
+.header-logo img{height:42px;width:auto;border-radius:8px;flex-shrink:0}
+.header-logo-text h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--green-800);line-height:1.15;white-space:nowrap}
+.header-logo-text p{font-size:10px;color:var(--text-light);letter-spacing:0.3px;white-space:nowrap}
+.header-nav{display:flex;align-items:center;gap:6px}
+.header-nav a{text-decoration:none;color:var(--text);font-size:13px;font-weight:500;transition:all .2s;position:relative;padding:8px 12px;border-radius:8px}
+.header-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.header-nav a.active{color:var(--green-700);font-weight:600}
+.cart-btn{position:relative}
+.cart-count{position:absolute;top:-2px;right:-2px;background:var(--gold);color:var(--white);font-size:9px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.mobile-toggle{display:none;background:none;border:none;font-size:22px;color:var(--green-700);cursor:pointer;padding:10px;min-width:44px;min-height:44px}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{max-width:1400px;margin:0 auto;padding:12px 20px;font-size:13px;color:var(--text-light)}
+.breadcrumb a{color:var(--green-600);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb span{margin:0 6px;color:#ccc}
+
+/* ── PAGE HEADER ── */
+.page-header{background:linear-gradient(135deg,var(--green-800),var(--green-700));padding:40px 20px;text-align:center;color:var(--white)}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:6px}
+.page-header h1 span{color:var(--gold)}
+.page-header p{font-size:0.95rem;color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto}
+
+/* ── CART LAYOUT ── */
+.cart-section{max-width:1400px;margin:0 auto;padding:30px 20px 60px;display:grid;grid-template-columns:1fr 360px;gap:32px;align-items:start}
+
+/* ── CART ITEMS ── */
+.cart-items-header{display:grid;grid-template-columns:3fr 1fr 1fr 1fr 40px;gap:12px;padding:14px 16px;background:var(--white);border-radius:var(--radius) var(--radius) 0 0;font-size:12px;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--green-50)}
+.cart-item{display:grid;grid-template-columns:3fr 1fr 1fr 1fr 40px;gap:12px;align-items:center;padding:16px;background:var(--white);border-bottom:1px solid var(--green-50);transition:background .2s}
+.cart-item:last-of-type{border-radius:0 0 var(--radius) var(--radius);border-bottom:none}
+.cart-item:hover{background:var(--green-50)}
+.cart-item-product{display:flex;align-items:center;gap:14px}
+.cart-item-product img{width:72px;height:72px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.cart-item-details h4{font-size:14px;color:var(--text);margin-bottom:3px;line-height:1.3}
+.cart-item-details .origin{font-size:11px;color:var(--text-light)}
+.cart-item-details .unit-price-mobile{display:none}
+.cart-item-qty{display:flex;align-items:center;gap:6px;justify-content:center}
+.cart-item-qty button{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--green-200);background:var(--white);color:var(--green-700);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;min-width:36px;min-height:36px;font-family:'Inter',sans-serif}
+.cart-item-qty button:hover{background:var(--green-600);color:var(--white);border-color:var(--green-600)}
+.cart-item-qty button:active{transform:scale(0.92)}
+.cart-item-qty .qty-val{font-size:15px;font-weight:600;color:var(--text);min-width:28px;text-align:center;user-select:none}
+.cart-item-price{font-size:14px;font-weight:600;color:var(--green-700);text-align:center}
+.cart-item-line{font-size:14px;font-weight:600;color:var(--text);text-align:center}
+.cart-item-remove{background:none;border:none;color:#ccc;font-size:16px;cursor:pointer;padding:8px;transition:color .2s;display:flex;align-items:center;justify-content:center;min-width:36px;min-height:36px}
+.cart-item-remove:hover{color:#e74c3c}
+.cart-items-container{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+/* ── ORDER SUMMARY ── */
+.cart-summary{position:sticky;top:calc(var(--header-h) + 20px);background:var(--white);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-lg)}
+.cart-summary h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--green-800);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--green-50)}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:14px;color:var(--text)}
+.summary-row .label{color:var(--text-light)}
+.summary-row .value{font-weight:500}
+.summary-row.delivery .value{font-size:13px}
+.summary-row.delivery .value.free{color:var(--green-600);font-weight:600}
+.summary-divider{height:1px;background:var(--green-50);margin:8px 0}
+.summary-row.total{font-size:18px;font-weight:700;color:var(--green-800);padding:14px 0 8px}
+.summary-row.total .value{color:var(--green-700)}
+.checkout-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--green-700),var(--green-600));color:var(--white);border:none;border-radius:50px;font-size:16px;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;font-family:'Inter',sans-serif;text-decoration:none;min-height:52px}
+.checkout-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(22,122,84,0.3)}
+.checkout-btn:active{transform:scale(0.98)}
+.continue-shopping{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;padding:10px;color:var(--green-600);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s;border-radius:8px}
+.continue-shopping:hover{color:var(--green-800);background:var(--green-50)}
+
+/* ── EMPTY CART ── */
+.empty-cart{display:none;max-width:1400px;margin:0 auto;padding:80px 20px;text-align:center}
+.empty-cart .empty-icon{font-size:80px;color:var(--green-200);margin-bottom:20px;display:block}
+.empty-cart h2{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2rem);color:var(--green-800);margin-bottom:10px}
+.empty-cart h2 span{color:var(--gold)}
+.empty-cart p{color:var(--text-light);margin-bottom:24px;font-size:15px;max-width:400px;margin-left:auto;margin-right:auto}
+.empty-cart .shop-link{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--green-600);color:var(--white);text-decoration:none;border-radius:50px;font-size:15px;font-weight:600;transition:all .3s}
+.empty-cart .shop-link:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,155,106,0.3)}
+
+/* ── SUGGESTED ITEMS ── */
+.suggested-section{max-width:1400px;margin:0 auto;padding:0 20px 60px}
+.suggested-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2vw,1.8rem);color:var(--green-800);margin-bottom:20px;text-align:center}
+.suggested-section h2 span{color:var(--gold)}
+.suggested-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.suggested-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all .3s;cursor:pointer}
+.suggested-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.suggested-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.suggested-info{padding:12px 14px}
+.suggested-info h4{font-size:13px;color:var(--text);margin-bottom:3px}
+.suggested-info .origin{font-size:11px;color:var(--text-light);margin-bottom:4px}
+.suggested-info .price{font-size:15px;font-weight:600;color:var(--green-700)}
+.suggested-add{width:100%;margin-top:10px;padding:8px;background:var(--green-50);border:1px solid var(--green-200);border-radius:8px;color:var(--green-700);font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px;min-height:36px;font-family:'Inter',sans-serif}
+.suggested-add:hover{background:var(--green-600);color:var(--white);border-color:var(--green-600)}
+
+/* ── FOOTER ── */
+.footer{background:var(--green-900);padding:50px 20px 24px;margin-top:0}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.footer h4{color:var(--white);font-size:14px;margin-bottom:14px;font-weight:600}
+.footer a{display:block;color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;padding:4px 0}
+.footer a:hover{color:var(--gold)}
+.footer p{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.7}
+.footer-brand .logo-icon{margin-bottom:10px}
+.footer-bottom{max-width:1400px;margin:32px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;font-size:12px;color:rgba(255,255,255,0.4)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .cart-section{grid-template-columns:1fr}
+  .cart-summary{position:static}
+  .suggested-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .mobile-toggle{display:flex;align-items:center;justify-content:center}
+  .header-nav{position:fixed;top:var(--header-h);left:0;right:0;background:var(--white);flex-direction:column;padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom,16px));box-shadow:var(--shadow-lg);transform:translateY(-110%);opacity:0;pointer-events:none;transition:all .3s ease;gap:2px;z-index:999}
+  .header-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .header-nav a{display:block;padding:12px 8px;font-size:15px;width:100%;border-radius:8px}
+  .header-nav a.active{background:var(--green-50)}
+  .cart-items-header{display:none}
+  .cart-item{grid-template-columns:1fr;gap:10px;padding:14px;position:relative}
+  .cart-item-product img{width:60px;height:60px}
+  .cart-item-details .unit-price-mobile{display:inline;font-size:12px;color:var(--text-light);font-weight:400;margin-left:4px}
+  .cart-item-price{display:none}
+  .cart-item-line{text-align:right;font-size:15px}
+  .cart-item-row2{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+  .cart-item-remove{position:absolute;top:10px;right:10px}
+  .cart-item-qty{justify-content:flex-start}
+  .page-header{padding:32px 16px}
+  .suggested-section{padding:0 16px 40px}
+  .cart-section{padding:20px 16px 40px}
+}
+@media(max-width:480px){
+  .header-logo img{height:34px}
+  .header-logo-text h1{font-size:15px}
+  .header-logo-text p{font-size:9px}
+  .empty-cart{padding:50px 16px}
+  .empty-cart .empty-icon{font-size:60px}
+  .suggested-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .cart-summary{padding:20px}
+  .cart-item-qty button{width:40px;height:40px;min-width:40px;min-height:40px;font-size:18px}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:380px){
+  .header-logo-text h1{font-size:13px}
+  .header-logo-text p{font-size:8px}
+  .header-logo img{height:30px}
+  .suggested-grid{grid-template-columns:1fr;gap:12px}
+  .empty-cart h2{font-size:1.3rem}
+  .header-nav a{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img src="images/logo-storefront.jpg" alt="Eden Groceries Logo">
+      <div class="header-logo-text">
+        <h1>Eden Groceries</h1>
+        <p>African &amp; Caribbean</p>
+      </div>
+    </a>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <nav class="header-nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html" class="active"><i class="fas fa-shopping-basket"></i> Cart <span class="cart-count" id="navCartCount">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span>Cart</div>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Your <span>Basket</span></h1>
+  <p>Review the items in your cart before checking out. Available for pickup or local delivery.</p>
+</section>
+
+<!-- CART SECTION -->
+<section class="cart-section" id="cartSection">
+  <!-- Cart Items -->
+  <div class="cart-items">
+    <div class="cart-items-header">
+      <span>Product</span>
+      <span style="text-align:center">Price</span>
+      <span style="text-align:center">Quantity</span>
+      <span style="text-align:center">Total</span>
+      <span></span>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer"></div>
+  </div>
+
+  <!-- Order Summary -->
+  <aside class="cart-summary" id="cartSummary">
+    <h3><i class="fas fa-receipt" style="margin-right:8px;color:var(--gold);font-size:16px"></i> Order Summary</h3>
+    <div class="summary-row">
+      <span class="label">Subtotal</span>
+      <span class="value" id="summarySubtotal">$0.00</span>
+    </div>
+    <div class="summary-row">
+      <span class="label">Items</span>
+      <span class="value" id="summaryItemCount">0</span>
+    </div>
+    <div class="summary-row delivery">
+      <span class="label">Delivery</span>
+      <span class="value" id="summaryDelivery">$5.00</span>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-row">
+      <span class="label">HST (13%)</span>
+      <span class="value" id="summaryHst">$0.00</span>
+    </div>
+    <div class="summary-divider"></div>
+    <div class="summary-row total">
+      <span>Total</span>
+      <span class="value" id="summaryTotal">$0.00</span>
+    </div>
+    <a href="checkout.html" class="checkout-btn"><i class="fas fa-lock"></i> Proceed to Checkout</a>
+    <a href="shop.html" class="continue-shopping"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+  </aside>
+</section>
+
+<!-- EMPTY CART -->
+<section class="empty-cart" id="emptyCart">
+  <i class="fas fa-shopping-basket empty-icon"></i>
+  <h2>Your Basket is <span>Empty</span></h2>
+  <p>Looks like you haven't added anything yet. Browse our full selection of African and Caribbean groceries and start filling your basket!</p>
+  <a href="shop.html" class="shop-link"><i class="fas fa-store"></i> Start Shopping</a>
+</section>
+
+<!-- SUGGESTED ITEMS -->
+<section class="suggested-section" id="suggestedSection">
+  <h2>You Might <span>Like</span></h2>
+  <div class="suggested-grid" id="suggestedGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--green-700),var(--green-500));border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:var(--white);font-size:20px;font-weight:700;font-family:'Playfair Display',serif">E</div>
+      <p>Eden African &amp; Caribbean Groceries brings the authentic flavours of home to Barrie, Ontario. Fresh produce, spices, frozen goods, and more — order online for pickup or delivery.</p>
+    </div>
+    <div><h4>Pages</h4><a href="index.html">Home</a><a href="shop.html">Shop All</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="cart.html">Cart</a></div>
+    <div><h4>Categories</h4><a href="shop.html?cat=Fresh+Produce">Fresh Produce</a><a href="shop.html?cat=Spices+%26+Seasonings">Spices &amp; Seasonings</a><a href="shop.html?cat=Frozen+Fish+%26+Meat">Frozen Fish &amp; Meat</a><a href="shop.html?cat=Rice+%26+Grains">Rice &amp; Grains</a><a href="shop.html?cat=Bakery+%26+Snacks">Bakery &amp; Snacks</a><a href="shop.html?cat=Beverages">Beverages</a></div>
+    <div><h4>Contact</h4><p>Barrie, Ontario</p><p>(705) 796-....</p><p>Mon-Fri: 10AM-8PM | Sat: 10AM-6PM</p><p style="margin-top:12px"><a href="https://www.instagram.com/shopfest_inc/" target="_blank" style="display:inline"><i class="fab fa-instagram"></i> @shopfest_inc</a></p></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 Eden African &amp; Caribbean Groceries. All rights reserved. | Barrie, Ontario</p></div>
+</footer>
+
+<script>
+// ── PRODUCT DATA (27 items, matching shop.html) ──
+const PRODUCTS = [
+  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80',best:true},
+  {name:'Green Plantains',cat:'Fresh Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://images.unsplash.com/photo-1563379092-713a12b607dd?w=400&q=80',best:false},
+  {name:'Cassava (Yuca)',cat:'Fresh Produce',origin:'Costa Rica',price:3.49,unit:'lb',img:'https://images.unsplash.com/photo-1584486181114-3ba447e2d40b?w=400&q=80',best:false},
+  {name:'Fresh Coconut',cat:'Fresh Produce',origin:'Jamaica',price:2.99,unit:'each',img:'https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=400&q=80',best:false},
+  {name:'Okra',cat:'Fresh Produce',origin:'Honduras',price:2.99,unit:'lb',img:'https://images.unsplash.com/photo-1425543103980-d7e58c6aa38c?w=400&q=80',best:false},
+  {name:'Scotch Bonnet Peppers',cat:'Spices & Seasonings',origin:'Trinidad',price:4.99,unit:'pack',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80',best:true},
+  {name:'Ogbono Seeds',cat:'Spices & Seasonings',origin:'Nigeria',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1596040033229-982a0d3c2d5e?w=400&q=80',best:false},
+  {name:'Jerk Seasoning',cat:'Spices & Seasonings',origin:'Jamaica',price:6.99,unit:'jar',img:'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=400&q=80',best:true},
+  {name:'Curry Powder',cat:'Spices & Seasonings',origin:'Trinidad',price:4.49,unit:'pack',img:'https://images.unsplash.com/photo-1591099441548-47d9a442b6b8?w=400&q=80',best:false},
+  {name:'Frozen Mackerel',cat:'Frozen Fish & Meat',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&q=80',best:true},
+  {name:'Frozen Tilapia',cat:'Frozen Fish & Meat',origin:'Honduras',price:6.49,unit:'lb',img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80',best:false},
+  {name:'Frozen Snapper',cat:'Frozen Fish & Meat',origin:'Guyana',price:9.99,unit:'lb',img:'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=400&q=80',best:false},
+  {name:'Frozen Oxtail',cat:'Frozen Fish & Meat',origin:'Jamaica',price:11.99,unit:'lb',img:'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&q=80',best:true},
+  {name:'Jasmine Rice 5lb',cat:'Rice & Grains',origin:'Thailand',price:8.99,unit:'bag',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80',best:false},
+  {name:'Basmati Rice 5lb',cat:'Rice & Grains',origin:'India',price:9.99,unit:'bag',img:'https://images.unsplash.com/photo-1551044289-d0e98e9b53a2?w=400&q=80',best:false},
+  {name:'Brown Rice 5lb',cat:'Rice & Grains',origin:'USA',price:7.49,unit:'bag',img:'https://images.unsplash.com/photo-1553532435-93d530a97bb1?w=400&q=80',best:false},
+  {name:'Fufu Flour',cat:'Rice & Grains',origin:'Ghana',price:5.99,unit:'pack',img:'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80',best:true},
+  {name:'Hard Dough Bread',cat:'Bakery & Snacks',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',best:true},
+  {name:'Coconut Drops',cat:'Bakery & Snacks',origin:'Jamaica',price:3.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false},
+  {name:'Spice Buns',cat:'Bakery & Snacks',origin:'Jamaica',price:3.99,unit:'each',img:'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80',best:false},
+  {name:'Caribbean Sorrel',cat:'Beverages',origin:'Trinidad',price:3.99,unit:'bottle',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80',best:false},
+  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&q=80',best:false},
+  {name:'Coconut Water',cat:'Beverages',origin:'Brazil',price:2.99,unit:'bottle',img:'https://images.unsplash.com/photo-1529693662653-9d480530a697?w=400&q=80',best:false},
+  {name:'Mauby Drink',cat:'Beverages',origin:'Trinidad',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80',best:false},
+  {name:'Red Palm Oil',cat:'Cooking Ingredients',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80',best:true},
+  {name:'Coconut Milk',cat:'Cooking Ingredients',origin:'Thailand',price:3.99,unit:'can',img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80',best:false},
+  {name:'Cassava Flour',cat:'Cooking Ingredients',origin:'Brazil',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80',best:false},
+];
+
+// ── STATE ──
+let cart = [];
+
+// ── CART HELPERS ──
+function loadCart(){
+  cart = JSON.parse(localStorage.getItem('edenCart')||'[]');
+}
+function saveCart(){
+  localStorage.setItem('edenCart',JSON.stringify(cart));
+  updateNavCount();
+}
+function updateNavCount(){
+  const c = cart.reduce((s,i) => s + i.qty, 0);
+  const el = document.getElementById('navCartCount');
+  if(el) el.textContent = c;
+}
+
+// ── RENDER CART ──
+function renderCart(){
+  const container = document.getElementById('cartItemsContainer');
+  const cartSection = document.getElementById('cartSection');
+  const emptyEl = document.getElementById('emptyCart');
+  const suggestedEl = document.getElementById('suggestedSection');
+
+  if(!cart.length){
+    cartSection.style.display = 'none';
+    emptyEl.style.display = 'block';
+    suggestedEl.style.display = 'block';
+    renderSuggested();
+    updateSummary();
+    return;
+  }
+
+  cartSection.style.display = 'grid';
+  emptyEl.style.display = 'none';
+  suggestedEl.style.display = 'block';
+
+  container.innerHTML = cart.map((item, idx) => {
+    const lineTotal = (item.price * item.qty).toFixed(2);
+    return `
+      <div class="cart-item" data-index="${idx}">
+        <div class="cart-item-product">
+          <img src="${item.img}" alt="${item.name}" loading="lazy" width="72" height="72">
+          <div class="cart-item-details">
+            <h4>${item.name}</h4>
+            <div class="origin">${item.origin} · ${item.cat}<span class="unit-price-mobile"> — $${item.price.toFixed(2)}/${item.unit}</span></div>
+          </div>
+        </div>
+        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+        <div class="cart-item-qty">
+          <button onclick="changeQty(${idx},-1)" aria-label="Decrease quantity"><i class="fas fa-minus"></i></button>
+          <span class="qty-val">${item.qty}</span>
+          <button onclick="changeQty(${idx},1)" aria-label="Increase quantity"><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="cart-item-line">$${lineTotal}</div>
+        <button class="cart-item-remove" onclick="removeItem(${idx})" aria-label="Remove item"><i class="fas fa-trash-alt"></i></button>
+      </div>
+    `;
+  }).join('');
+
+  updateSummary();
+  renderSuggested();
+}
+
+// ── QUANTITY CHANGES ──
+function changeQty(idx, delta){
+  if(!cart[idx]) return;
+  cart[idx].qty += delta;
+  if(cart[idx].qty < 1) cart[idx].qty = 1;
+  if(cart[idx].qty > 99) cart[idx].qty = 99;
+  saveCart();
+  renderCart();
+}
+
+function removeItem(idx){
+  if(!cart[idx]) return;
+  cart.splice(idx, 1);
+  saveCart();
+  renderCart();
+}
+
+// ── UPDATE ORDER SUMMARY ──
+function updateSummary(){
+  const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+  const itemCount = cart.reduce((s, i) => s + i.qty, 0);
+  const delivery = subtotal >= 50 ? 0 : 5.00;
+  const hst = subtotal * 0.13;
+  const total = subtotal + delivery + hst;
+
+  document.getElementById('summarySubtotal').textContent = '$' + subtotal.toFixed(2);
+  document.getElementById('summaryItemCount').textContent = itemCount;
+  
+  const deliveryEl = document.getElementById('summaryDelivery');
+  if(delivery === 0){
+    deliveryEl.textContent = 'FREE';
+    deliveryEl.className = 'value free';
+  } else {
+    deliveryEl.textContent = '$' + delivery.toFixed(2);
+    deliveryEl.className = 'value';
+  }
+
+  document.getElementById('summaryHst').textContent = '$' + hst.toFixed(2);
+  document.getElementById('summaryTotal').textContent = '$' + total.toFixed(2);
+  
+  // Update nav count as well
+  updateNavCount();
+}
+
+// ── SUGGESTED ITEMS ──
+function renderSuggested(){
+  const grid = document.getElementById('suggestedGrid');
+  if(!grid) return;
+
+  // Get names already in cart to avoid suggesting them
+  const cartNames = new Set(cart.map(i => i.name));
+  const available = PRODUCTS.filter(p => !cartNames.has(p.name));
+
+  // Pick 3-4 random products
+  const count = Math.min(available.length, 4);
+  const shuffled = [...available].sort(() => Math.random() - 0.5);
+  const picks = shuffled.slice(0, count);
+
+  if(!picks.length){
+    grid.innerHTML = '';
+    return;
+  }
+
+  grid.innerHTML = picks.map(p => {
+    const globalIdx = PRODUCTS.indexOf(p);
+    return `
+      <div class="suggested-card">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" width="400" height="300">
+        <div class="suggested-info">
+          <h4>${p.name}</h4>
+          <div class="origin">${p.origin}</div>
+          <div class="price">$${p.price.toFixed(2)} <span style="font-size:11px;font-weight:400;color:var(--text-light)">/ ${p.unit}</span></div>
+          <button class="suggested-add" onclick="suggestedAdd(${globalIdx}, this)"><i class="fas fa-plus"></i> Add to Cart</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function suggestedAdd(idx, btn){
+  const p = PRODUCTS[idx];
+  const existing = cart.find(i => i.name === p.name);
+  if(existing){
+    existing.qty++;
+  } else {
+    cart.push({...p, qty: 1});
+  }
+  saveCart();
+  renderCart();
+  
+  btn.innerHTML = '<i class="fas fa-check"></i> Added!';
+  btn.style.background = 'var(--green-600)';
+  btn.style.color = 'white';
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fas fa-plus"></i> Add to Cart';
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 1200);
+}
+
+// ── MOBILE MENU ──
+document.getElementById('mobileToggle').addEventListener('click', function(){
+  document.getElementById('nav').classList.toggle('open');
+});
+function closeMobileMenu(){
+  document.getElementById('nav').classList.remove('open');
+}
+window.addEventListener('resize', () => {
+  if(window.innerWidth > 768) closeMobileMenu();
+});
+
+// ── INIT ──
+loadCart();
+renderCart();
+</script>
+</body>
+</html>

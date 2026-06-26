@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Checkout — Eden African & Caribbean Groceries | Barrie, ON</title>
+<meta name="description" content="Complete your order from Eden African & Caribbean Groceries. Fast and easy checkout for pickup or delivery in Barrie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green-900:#0a3d2b;--green-800:#0f5a3e;--green-700:#167a54;--green-600:#1e9b6a;--green-500:#28b87f;--green-400:#5cd3a2;--green-200:#bcf5de;--green-50:#e6faf1;--gold:#d4a843;--gold-light:#f0d68a;--cream:#faf6ef;--dark:#1a1a2e;--text:#2d3436;--text-light:#636e72;--white:#fff;--shadow:0 4px 24px rgba(0,0,0,0.08);--shadow-lg:0 12px 40px rgba(0,0,0,0.12);--red:#e74c3c;--radius:12px;--radius-lg:20px;--header-h:70px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-top:var(--header-h)}
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--white);z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.06);transition:transform .3s}
+.header-inner{max-width:1400px;margin:0 auto;padding:0 16px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.header-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex-shrink:0}
+.header-logo img{height:42px;width:auto;border-radius:8px;flex-shrink:0}
+.header-logo-text h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--green-800);line-height:1.15;white-space:nowrap}
+.header-logo-text p{font-size:10px;color:var(--text-light);letter-spacing:0.3px;white-space:nowrap}
+.header-nav{display:flex;align-items:center;gap:6px}
+.header-nav a{text-decoration:none;color:var(--text);font-size:13px;font-weight:500;transition:all .2s;position:relative;padding:8px 12px;border-radius:8px}
+.header-nav a:hover{background:var(--green-50);color:var(--green-700)}
+.header-nav a.active{color:var(--green-700);font-weight:600}
+.mobile-toggle{display:none;background:none;border:none;font-size:22px;color:var(--green-700);cursor:pointer;padding:10px;min-width:44px;min-height:44px}
+
+.breadcrumb{max-width:1400px;margin:0 auto;padding:12px 20px;font-size:13px;color:var(--text-light)}
+.breadcrumb a{color:var(--green-600);text-decoration:none}
+.breadcrumb span{margin:0 6px;color:#ccc}
+
+.page-header{background:linear-gradient(135deg,var(--green-800),var(--green-700));padding:40px 20px;text-align:center;color:var(--white)}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:6px}
+.page-header h1 span{color:var(--gold)}
+.page-header p{font-size:0.95rem;color:rgba(255,255,255,0.75)}
+
+/* ── CHECKOUT LAYOUT ── */
+.checkout-layout{max-width:1200px;margin:0 auto;padding:32px 20px 60px;display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start}
+.checkout-form{background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow)}
+.checkout-form h2{font-size:18px;color:var(--green-800);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--green-50)}
+
+.form-section{margin-bottom:28px}
+.form-section h3{font-size:14px;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.form-section h3 .step{width:26px;height:26px;border-radius:50%;background:var(--green-600);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:5px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:16px;font-family:'Inter',sans-serif;transition:border-color .2s;background:var(--white);-webkit-appearance:none;appearance:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--green-600);box-shadow:0 0 0 3px rgba(30,155,106,0.1)}
+.form-group textarea{resize:vertical;min-height:70px}
+.form-group .hint{font-size:11px;color:var(--text-light);margin-top:4px}
+
+/* ── DELIVERY OPTIONS ── */
+.delivery-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.delivery-opt{padding:14px;border:2px solid #e0e0e0;border-radius:var(--radius);cursor:pointer;transition:all .2s;text-align:center}
+.delivery-opt:hover{border-color:var(--green-400)}
+.delivery-opt.selected{border-color:var(--green-600);background:var(--green-50)}
+.delivery-opt .opt-icon{font-size:22px;color:var(--green-600);margin-bottom:6px}
+.delivery-opt .opt-label{font-size:13px;font-weight:500;color:var(--text)}
+.delivery-opt .opt-desc{font-size:11px;color:var(--text-light);margin-top:2px}
+.delivery-opt .opt-price{font-size:12px;color:var(--green-700);font-weight:500;margin-top:4px}
+
+/* ── TIME SLOTS ── */
+.time-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.time-slot{padding:10px;border:2px solid #e0e0e0;border-radius:8px;cursor:pointer;transition:all .2s;text-align:center;font-size:13px}
+.time-slot:hover{border-color:var(--green-400)}
+.time-slot.selected{border-color:var(--green-600);background:var(--green-50);font-weight:500}
+.time-slot .slot-label{color:var(--text)}
+.time-slot .slot-status{font-size:10px;color:var(--text-light);margin-top:2px}
+
+/* ── ORDER SUMMARY ── */
+.order-summary{background:var(--white);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow);position:sticky;top:calc(var(--header-h) + 20px)}
+.order-summary h2{font-size:16px;color:var(--green-800);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #eee}
+.order-items{max-height:300px;overflow-y:auto;margin-bottom:16px}
+.order-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f5f5f5;align-items:center}
+.order-item-img{width:44px;height:44px;border-radius:6px;object-fit:cover;flex-shrink:0}
+.order-item-info{flex:1;min-width:0}
+.order-item-info h4{font-size:12px;color:var(--text);margin-bottom:2px;line-height:1.2}
+.order-item-info .meta{font-size:11px;color:var(--text-light)}
+.order-item-price{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap}
+.order-totals{padding-top:12px;border-top:1px solid #eee}
+.total-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:var(--text)}
+.total-row.discount{color:var(--green-700)}
+.total-row.grand{border-top:2px solid var(--green-200);margin-top:8px;padding-top:10px;font-size:16px;font-weight:700;color:var(--text)}
+.place-order{width:100%;padding:14px;background:var(--gold);color:var(--green-900);border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:16px;min-height:48px;font-family:'Inter',sans-serif}
+.place-order:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,168,67,0.3)}
+.place-order:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.place-order i{margin-right:8px}
+.secure-badge{text-align:center;font-size:12px;color:var(--text-light);margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* ── EMPTY CART ── */
+.empty-checkout{text-align:center;padding:80px 20px}
+.empty-checkout i{font-size:64px;color:var(--green-200);margin-bottom:20px;display:block}
+.empty-checkout h2{font-size:22px;color:var(--text);margin-bottom:8px}
+.empty-checkout p{color:var(--text-light);margin-bottom:24px}
+.empty-checkout a{padding:14px 32px;background:var(--green-600);color:var(--white);text-decoration:none;border-radius:50px;font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+
+/* ── SUCCESS OVERLAY ── */
+.order-success{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:3000;align-items:center;justify-content:center;padding:20px}
+.order-success.active{display:flex}
+.success-card{background:var(--white);border-radius:var(--radius-lg);padding:40px 32px;max-width:440px;width:100%;text-align:center}
+.success-card .check{width:72px;height:72px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px;color:var(--green-600)}
+.success-card h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--green-800);margin-bottom:8px}
+.success-card p{color:var(--text-light);font-size:14px;line-height:1.6;margin-bottom:20px}
+.success-card .order-id{background:var(--cream);padding:10px;border-radius:8px;font-size:13px;margin-bottom:20px;color:var(--text)}
+.success-card .order-id strong{color:var(--green-700)}
+
+/* ── FOOTER ── */
+.footer{background:var(--green-900);padding:50px 20px 24px;margin-top:60px}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.footer h4{color:var(--white);font-size:14px;margin-bottom:14px;font-weight:600}
+.footer a{display:block;color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s;padding:4px 0}
+.footer a:hover{color:var(--gold)}
+.footer p{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.7}
+.footer-bottom{max-width:1400px;margin:32px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;font-size:12px;color:rgba(255,255,255,0.4)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .checkout-layout{grid-template-columns:1fr}
+  .order-summary{position:static}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .mobile-toggle{display:flex;align-items:center;justify-content:center}
+  .header-nav{position:fixed;top:var(--header-h);left:0;right:0;background:var(--white);flex-direction:column;padding:16px 20px;padding-bottom:max(16px,env(safe-area-inset-bottom,16px));box-shadow:var(--shadow-lg);transform:translateY(-110%);opacity:0;pointer-events:none;transition:all .3s ease;gap:2px}
+  .header-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .header-nav a{display:block;padding:12px 8px;font-size:15px;width:100%;border-radius:8px}
+  .header-nav a.active{background:var(--green-50)}
+  .checkout-form{padding:24px 16px;border-radius:var(--radius)}
+  .form-row{grid-template-columns:1fr}
+  .delivery-options{grid-template-columns:1fr}
+  .time-slots{grid-template-columns:repeat(3,1fr)}
+  .page-header{padding:32px 16px}
+}
+@media(max-width:480px){
+  .time-slots{grid-template-columns:repeat(2,1fr)}
+  .checkout-layout{padding:16px 12px 40px}
+  .header-logo img{height:34px}
+  .header-logo-text h1{font-size:15px}
+  .header-logo-text p{font-size:9px}
+  .order-summary{padding:20px}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+  .success-card{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img src="images/logo-storefront.jpg" alt="Eden Groceries Logo">
+      <div class="header-logo-text">
+        <h1>Eden Groceries</h1>
+        <p>African &amp; Caribbean</p>
+      </div>
+    </a>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+    <nav class="header-nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html"><i class="fas fa-shopping-basket"></i> Cart <span class="cart-count" id="navCartCount" style="position:relative;top:-6px;font-size:9px;background:var(--gold);color:var(--white);width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:600;margin-left:2px">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb"><a href="index.html">Home</a><span>›</span><a href="cart.html">Cart</a><span>›</span>Checkout</div>
+<section class="page-header">
+  <h1>Secure <span>Checkout</span></h1>
+  <p>Complete your order for pickup or delivery in Barrie.</p>
+</section>
+
+<!-- MAIN CHECKOUT -->
+<div id="checkoutContainer">
+  <div class="checkout-layout" id="checkoutForm">
+    <form class="checkout-form" onsubmit="placeOrder(event)" id="orderForm">
+      <h2><i class="fas fa-file-invoice"></i> Order Details</h2>
+
+      <div class="form-section">
+        <h3><span class="step">1</span> Contact Information</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" id="ordName" required placeholder="Your full name"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="ordPhone" required placeholder="(705) XXX-XXXX"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="ordEmail" required placeholder="your@email.com"></div>
+      </div>
+
+      <div class="form-section">
+        <h3><span class="step">2</span> Delivery or Pickup</h3>
+        <div class="delivery-options" id="deliveryOptions">
+          <div class="delivery-opt selected" onclick="selectDelivery('pickup')" id="optPickup">
+            <div class="opt-icon"><i class="fas fa-store"></i></div>
+            <div class="opt-label">Store Pickup</div>
+            <div class="opt-desc">Pick up at our Barrie location</div>
+            <div class="opt-price">Free</div>
+          </div>
+          <div class="delivery-opt" onclick="selectDelivery('delivery')" id="optDelivery">
+            <div class="opt-icon"><i class="fas fa-truck"></i></div>
+            <div class="opt-label">Delivery</div>
+            <div class="opt-desc">Within Barrie city limits</div>
+            <div class="opt-price" id="deliveryPrice">$5.00</div>
+          </div>
+        </div>
+        <div class="form-group" id="addressGroup" style="display:none">
+          <label>Delivery Address</label>
+          <input type="text" id="ordAddress" placeholder="Street address, unit #">
+          <div class="hint">Free delivery on orders over $50. Same-day delivery available for orders placed before 4PM.</div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3><span class="step">3</span> Preferred Pickup / Delivery Time</h3>
+        <div class="time-slots" id="timeSlots"></div>
+      </div>
+
+      <div class="form-section">
+        <h3><span class="step">4</span> Order Notes (Optional)</h3>
+        <div class="form-group">
+          <textarea id="ordNotes" placeholder="Any special requests, substitutions, or preferences? Let us know..." rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3><span class="step">5</span> Payment Method</h3>
+        <div class="delivery-options" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="delivery-opt selected"><div class="opt-icon"><i class="fas fa-money-bill-wave"></i></div><div class="opt-label">Cash</div><div class="opt-desc">Pay at pickup/delivery</div></div>
+          <div class="delivery-opt"><div class="opt-icon"><i class="fas fa-credit-card"></i></div><div class="opt-label">Card</div><div class="opt-desc">Pay at store</div></div>
+          <div class="delivery-opt"><div class="opt-icon"><i class="fas fa-mobile-alt"></i></div><div class="opt-label">Interac e-Transfer</div><div class="opt-desc">Send to shopfestinc@gmail.com</div></div>
+        </div>
+      </div>
+    </form>
+
+    <!-- SIDEBAR -->
+    <aside class="order-summary">
+      <h2><i class="fas fa-receipt"></i> Order Summary</h2>
+      <div class="order-items" id="orderItems"></div>
+      <div class="order-totals">
+        <div class="total-row"><span>Subtotal (<span id="itemCount">0</span> items)</span><span id="subtotal">$0.00</span></div>
+        <div class="total-row" id="deliveryRow"><span>Delivery</span><span id="deliveryFee">$0.00</span></div>
+        <div class="total-row" id="discountRow" style="display:none;color:var(--green-700)"><span>Free Delivery</span><span>−$5.00</span></div>
+        <div class="total-row"><span>HST (13%)</span><span id="taxAmount">$0.00</span></div>
+        <div class="total-row grand"><span>Total</span><span id="grandTotal">$0.00</span></div>
+      </div>
+      <button class="place-order" onclick="placeOrder(event)" id="placeOrderBtn"><i class="fas fa-lock"></i> Place Order</button>
+      <div class="secure-badge"><i class="fas fa-shield-alt"></i> Secure checkout · Pay at pickup/delivery</div>
+    </aside>
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="order-success" id="orderSuccess">
+  <div class="success-card">
+    <div class="check"><i class="fas fa-check"></i></div>
+    <h2>Order Placed! 🎉</h2>
+    <p>Thank you! Your order has been received. We'll call you to confirm availability and arrange pickup or delivery.</p>
+    <div class="order-id">Order #: <strong id="successOrderId">EDEN-2026-XXXX</strong></div>
+    <p style="font-size:13px">We'll contact you at the phone number you provided within 30 minutes during business hours.</p>
+    <a href="shop.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--green-600);color:var(--white);text-decoration:none;border-radius:50px;font-size:14px;font-weight:600;margin-top:8px"><i class="fas fa-bag-shopping"></i> Continue Shopping</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--green-700),var(--green-500));border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:var(--white);font-size:20px;font-weight:700;font-family:'Playfair Display',serif">E</div>
+      <p>Eden African &amp; Caribbean Groceries — Barrie, Ontario.</p>
+    </div>
+    <div><h4>Pages</h4><a href="index.html">Home</a><a href="shop.html">Shop All</a><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="cart.html">Cart</a></div>
+    <div><h4>Categories</h4><a href="shop.html?cat=Fresh+Produce">Fresh Produce</a><a href="shop.html?cat=Spices+%26+Seasonings">Spices</a><a href="shop.html?cat=Frozen+Fish+%26+Meat">Frozen Fish</a><a href="shop.html?cat=Rice+%26+Grains">Rice</a></div>
+    <div><h4>Contact</h4><p>Barrie, Ontario</p><p>(705) 796-....</p><p>Mon-Fri: 10AM-8PM | Sat: 10AM-6PM</p></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 Eden African &amp; Caribbean Groceries. Barrie, Ontario</p></div>
+</footer>
+
+<script>
+// ── PRODUCT DATA (for order display) ──
+const products = [
+  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80'},
+  {name:'Green Plantains',cat:'Fresh Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://images.unsplash.com/photo-1563379092-713a12b607dd?w=400&q=80'},
+  {name:'Cassava (Yuca)',cat:'Fresh Produce',origin:'Costa Rica',price:3.49,unit:'lb',img:'https://images.unsplash.com/photo-1584486181114-3ba447e2d40b?w=400&q=80'},
+  {name:'Fresh Coconut',cat:'Fresh Produce',origin:'Jamaica',price:2.99,unit:'each',img:'https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=400&q=80'},
+  {name:'Okra',cat:'Fresh Produce',origin:'Honduras',price:2.99,unit:'lb',img:'https://images.unsplash.com/photo-1425543103980-d7e58c6aa38c?w=400&q=80'},
+  {name:'Scotch Bonnet Peppers',cat:'Spices & Seasonings',origin:'Trinidad',price:4.99,unit:'pack',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80'},
+  {name:'Ogbono Seeds',cat:'Spices & Seasonings',origin:'Nigeria',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1596040033229-982a0d3c2d5e?w=400&q=80'},
+  {name:'Jerk Seasoning',cat:'Spices & Seasonings',origin:'Jamaica',price:6.99,unit:'jar',img:'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=400&q=80'},
+  {name:'Curry Powder',cat:'Spices & Seasonings',origin:'Trinidad',price:4.49,unit:'pack',img:'https://images.unsplash.com/photo-1591099441548-47d9a442b6b8?w=400&q=80'},
+  {name:'Frozen Mackerel',cat:'Frozen Fish & Meat',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&q=80'},
+  {name:'Frozen Tilapia',cat:'Frozen Fish & Meat',origin:'Honduras',price:6.49,unit:'lb',img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80'},
+  {name:'Frozen Snapper',cat:'Frozen Fish & Meat',origin:'Guyana',price:9.99,unit:'lb',img:'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=400&q=80'},
+  {name:'Frozen Oxtail',cat:'Frozen Fish & Meat',origin:'Jamaica',price:11.99,unit:'lb',img:'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&q=80'},
+  {name:'Jasmine Rice 5lb',cat:'Rice & Grains',origin:'Thailand',price:8.99,unit:'bag',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80'},
+  {name:'Basmati Rice 5lb',cat:'Rice & Grains',origin:'India',price:9.99,unit:'bag',img:'https://images.unsplash.com/photo-1551044289-d0e98e9b53a2?w=400&q=80'},
+  {name:'Brown Rice 5lb',cat:'Rice & Grains',origin:'USA',price:7.49,unit:'bag',img:'https://images.unsplash.com/photo-1553532435-93d530a97bb1?w=400&q=80'},
+  {name:'Fufu Flour',cat:'Rice & Grains',origin:'Ghana',price:5.99,unit:'pack',img:'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80'},
+  {name:'Hard Dough Bread',cat:'Bakery & Snacks',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80'},
+  {name:'Coconut Drops',cat:'Bakery & Snacks',origin:'Jamaica',price:3.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80'},
+  {name:'Spice Buns',cat:'Bakery & Snacks',origin:'Jamaica',price:3.99,unit:'each',img:'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&q=80'},
+  {name:'Caribbean Sorrel',cat:'Beverages',origin:'Trinidad',price:3.99,unit:'bottle',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80'},
+  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&q=80'},
+  {name:'Coconut Water',cat:'Beverages',origin:'Brazil',price:2.99,unit:'bottle',img:'https://images.unsplash.com/photo-1529693662653-9d480530a697?w=400&q=80'},
+  {name:'Mauby Drink',cat:'Beverages',origin:'Trinidad',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80'},
+  {name:'Red Palm Oil',cat:'Cooking Ingredients',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80'},
+  {name:'Coconut Milk',cat:'Cooking Ingredients',origin:'Thailand',price:3.99,unit:'can',img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80'},
+  {name:'Cassava Flour',cat:'Cooking Ingredients',origin:'Brazil',price:5.49,unit:'pack',img:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&q=80'},
+];
+
+// ── STATE ──
+let cart = [];
+let deliveryMethod = 'pickup';
+const DELIVERY_FEE = 5.00;
+const FREE_DELIVERY_THRESHOLD = 50;
+const HST_RATE = 0.13;
+
+// ── TIME SLOTS ──
+function renderTimeSlots(){
+  const container=document.getElementById('timeSlots');
+  const now=new Date();
+  const day=now.getDay();
+  const slots=[];
+  const todaySlots=['10:00-11:00','11:00-12:00','12:00-13:00','13:00-14:00','14:00-15:00','15:00-16:00','16:00-17:00','17:00-18:00','18:00-19:00'];
+  if(day===0||day===6){/* Sat 10-6, Sun closed */}
+  const isToday=day>=1&&day<=5;
+  slots.push(...todaySlots.map(t=>({time:t,label:t.replace('-',' – '),available:true})));
+  container.innerHTML=slots.map((s,i)=>
+    `<div class="time-slot ${i===0?'selected':''}" onclick="selectTimeSlot(this)" data-time="${s.time}">
+      <div class="slot-label">${s.label}</div>
+      <div class="slot-status">${i===0?'Available':'Available'}</div>
+    </div>`
+  ).join('');
+  if(!isToday) container.innerHTML=todaySlots.map((t,i)=>
+    `<div class="time-slot ${i===2?'selected':''}" onclick="selectTimeSlot(this)" data-time="${t}">
+      <div class="slot-label">${t.replace('-',' – ')}</div>
+      <div class="slot-status">Available</div>
+    </div>`
+  ).join('');
+}
+
+function selectTimeSlot(el){
+  document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ── DELIVERY SELECTION ──
+function selectDelivery(method){
+  deliveryMethod=method;
+  document.querySelectorAll('.delivery-opt').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('opt'+(method==='pickup'?'Pickup':'Delivery')).classList.add('selected');
+  document.getElementById('addressGroup').style.display=method==='delivery'?'block':'none';
+  updateTotals();
+}
+
+// ── LOAD CART ──
+function loadCart(){
+  const raw=localStorage.getItem('edenCart');
+  cart=raw?JSON.parse(raw):[];
+  if(!cart.length){
+    document.getElementById('checkoutForm').innerHTML=`
+      <div class="empty-checkout">
+        <i class="fas fa-basket-shopping"></i>
+        <h2>Your cart is empty</h2>
+        <p>Add some products before checking out.</p>
+        <a href="shop.html"><i class="fas fa-arrow-left"></i> Browse Products</a>
+      </div>`;
+    return;
+  }
+  renderOrderItems();
+  updateTotals();
+}
+
+// ── RENDER ORDER ITEMS ──
+function renderOrderItems(){
+  const container=document.getElementById('orderItems');
+  container.innerHTML=cart.map(item=>{
+    const p=products.find(pp=>pp.name===item.name)||item;
+    return `<div class="order-item">
+      <img src="${p.img}" class="order-item-img" alt="${item.name}">
+      <div class="order-item-info">
+        <h4>${item.name}</h4>
+        <div class="meta">${item.qty} × $${item.price.toFixed(2)}/${item.unit}</div>
+      </div>
+      <div class="order-item-price">$${(item.price*item.qty).toFixed(2)}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── UPDATE TOTALS ──
+function updateTotals(){
+  const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const itemCount=cart.reduce((s,i)=>s+i.qty,0);
+  const delivery=deliveryMethod==='delivery'?DELIVERY_FEE:0;
+  const freeDelivery=deliveryMethod==='delivery'&&subtotal>=FREE_DELIVERY_THRESHOLD;
+  const effectiveDelivery=freeDelivery?0:delivery;
+  const hst=subtotal*HST_RATE;
+  const total=subtotal+effectiveDelivery+hst;
+
+  document.getElementById('itemCount').textContent=itemCount;
+  document.getElementById('subtotal').textContent=`$${subtotal.toFixed(2)}`;
+  document.getElementById('deliveryFee').textContent=delivery?`$${delivery.toFixed(2)}`:'$0.00';
+  document.getElementById('deliveryRow').style.display=deliveryMethod==='delivery'?'flex':'none';
+  
+  const discountRow=document.getElementById('discountRow');
+  if(freeDelivery){
+    discountRow.style.display='flex';
+    document.getElementById('deliveryFee').textContent='$5.00';
+  } else {
+    discountRow.style.display='none';
+  }
+  
+  document.getElementById('taxAmount').textContent=`$${hst.toFixed(2)}`;
+  document.getElementById('grandTotal').textContent=`$${total.toFixed(2)}`;
+  document.getElementById('navCartCount').textContent=itemCount;
+}
+
+// ── PLACE ORDER ──
+function placeOrder(e){
+  e.preventDefault();
+  if(!cart.length) return;
+
+  const name=document.getElementById('ordName').value;
+  const phone=document.getElementById('ordPhone').value;
+  const email=document.getElementById('ordEmail').value;
+  const address=deliveryMethod==='delivery'?document.getElementById('ordAddress').value:'Store Pickup';
+  const notes=document.getElementById('ordNotes').value;
+  const selectedSlot=document.querySelector('.time-slot.selected');
+  const timeSlot=selectedSlot?selectedSlot.dataset.time:'ASAP';
+
+  if(!name||!phone||!email){
+    alert('Please fill in your contact information.');
+    return;
+  }
+  if(deliveryMethod==='delivery'&&!document.getElementById('ordAddress').value){
+    alert('Please enter your delivery address.');
+    return;
+  }
+
+  const btn=document.getElementById('placeOrderBtn');
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Placing Order...';
+
+  const orderId='EDEN-'+Date.now().toString(36).toUpperCase();
+
+  const items=cart.map(i=>({name:i.name,qty:i.qty,price:i.price,unit:i.unit}));
+  const subtotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const effectiveDelivery=deliveryMethod==='delivery'&&subtotal<FREE_DELIVERY_THRESHOLD?DELIVERY_FEE:0;
+
+  const orderData={customer:{name,phone,email,address},items,total:subtotal+effectiveDelivery+subtotal*HST_RATE,method:deliveryMethod,notes,timeSlot,orderId};
+
+  fetch('http://178.156.135.237:3010/api/order',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(orderData)
+  }).then(r=>r.json()).then(data=>{
+    showSuccess(data.orderId||orderId);
+  }).catch(()=>{
+    // Fallback email
+    let text=`NEW ORDER - Eden Groceries\nOrder: ${orderId}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nMethod: ${deliveryMethod.toUpperCase()}\nTime: ${timeSlot}\nAddress: ${address}\nNotes: ${notes||'none'}\n\nITEMS:\n`;
+    items.forEach(i=>text+=`${i.qty}x ${i.name} @ $${i.price.toFixed(2)} = $${(i.price*i.qty).toFixed(2)}\n`);
+    text+=`\nTOTAL: $${(subtotal+effectiveDelivery+subtotal*HST_RATE).toFixed(2)}`;
+    window.open(`mailto:shopfestinc@gmail.com?subject=${encodeURIComponent('New Order '+orderId+' — Eden Groceries')}&body=${encodeURIComponent(text)}`,'_blank');
+    showSuccess(orderId);
+  });
+}
+
+function showSuccess(orderId){
+  cart=[];localStorage.setItem('edenCart','[]');
+  document.getElementById('successOrderId').textContent='EDEN-'+orderId;
+  document.getElementById('orderSuccess').classList.add('active');
+  document.getElementById('placeOrderBtn').disabled=false;
+  document.getElementById('placeOrderBtn').innerHTML='<i class="fas fa-lock"></i> Place Order';
+  document.getElementById('navCartCount').textContent=0;
+}
+
+// ── MOBILE MENU ──
+document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('nav').classList.toggle('open')});
+function closeMobileMenu(){document.getElementById('nav').classList.remove('open')}
+window.addEventListener('resize',()=>{if(window.innerWidth>768)closeMobileMenu()});
+
+// ── INIT ──
+renderTimeSlots();
+loadCart();
+</script>
+</body>
+</html>
