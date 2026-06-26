@@ -43,7 +43,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 
 /* ── HERO with DIGITAL FLYER ── */
 .hero-flyer{background:linear-gradient(135deg,var(--green-900),var(--green-700));position:relative;overflow:hidden}
-.hero-flyer::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&q=80')center/cover;opacity:.06}
+.hero-flyer::before{content:'';position:absolute;inset:0;background:url('https://plus.unsplash.com/premium_photo-1675365780148-a00379c54123?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8eWFtJTIwdHViZXIlMjB2ZWdldGFibGV8ZW58MHx8fHwxNzgyNDk3MDkzfDA&ixlib=rb-4.1.0&q=80&w=400')center/cover;opacity:.06}
 .hero-flyer-inner{max-width:1400px;margin:0 auto;padding:40px 20px;position:relative;z-index:2}
 
 /* ── WEEKLY DEALS BANNER ── */
@@ -378,18 +378,18 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 <script>
 // ── PRODUCT DATA (subset for deals/featured) ──
 const products = [
-  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80',best:true},
-  {name:'Green Plantains',cat:'Fresh Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://images.unsplash.com/photo-1563379092-713a12b607dd?w=400&q=80'},
-  {name:'Scotch Bonnet Peppers',cat:'Spices & Seasonings',origin:'Trinidad',price:4.99,unit:'pack',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80',best:true},
-  {name:'Jerk Seasoning',cat:'Spices & Seasonings',origin:'Jamaica',price:6.99,unit:'jar',img:'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=400&q=80',best:true},
-  {name:'Frozen Mackerel',cat:'Frozen Fish & Meat',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=400&q=80',best:true},
-  {name:'Frozen Oxtail',cat:'Frozen Fish & Meat',origin:'Jamaica',price:11.99,unit:'lb',img:'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&q=80',best:true},
-  {name:'Hard Dough Bread',cat:'Bakery & Snacks',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',best:true},
-  {name:'Fufu Flour',cat:'Rice & Grains',origin:'Ghana',price:5.99,unit:'pack',img:'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&q=80',best:true},
-  {name:'Red Palm Oil',cat:'Cooking Ingredients',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80',best:true},
-  {name:'Coconut Milk',cat:'Cooking Ingredients',origin:'Thailand',price:3.99,unit:'can',img:'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80'},
-  {name:'Jasmine Rice 5lb',cat:'Rice & Grains',origin:'Thailand',price:8.99,unit:'bag',img:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80'},
-  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&q=80'},
+  {name:'Fresh Yams',cat:'Fresh Produce',origin:'Jamaica',price:3.99,unit:'lb',img:'https://plus.unsplash.com/premium_photo-1663047777831-4b65f1489ab0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8Z3JlZW4lMjBwbGFudGFpbiUyMGJhbmFuYSUyMGNvb2tpbmd8ZW58MHx8fHwxNzgyNDk3MDk0fDA&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Green Plantains',cat:'Fresh Produce',origin:'Colombia',price:2.49,unit:'lb',img:'https://plus.unsplash.com/premium_photo-1725467479101-556af13a7220?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8Y2Fzc2F2YSUyMHJvb3QlMjB5dWNhfGVufDB8fHx8MTc4MjQ5NzA5NXww&ixlib=rb-4.1.0&q=80&w=400'},
+  {name:'Scotch Bonnet Peppers',cat:'Spices & Seasonings',origin:'Trinidad',price:4.99,unit:'pack',img:'https://plus.unsplash.com/premium_photo-1675040830227-9f18e88fd1f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8Y29jb251dCUyMHdob2xlfGVufDB8fHx8MTc4MjQ5NzA5Nnww&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Jerk Seasoning',cat:'Spices & Seasonings',origin:'Jamaica',price:6.99,unit:'jar',img:'https://plus.unsplash.com/premium_photo-1725669087986-0915cb0961cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8b2tyYSUyMHBvZHMlMjBmcmVzaHxlbnwwfHx8fDE3ODI0OTcwOTd8MA&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Frozen Mackerel',cat:'Frozen Fish & Meat',origin:'Ghana',price:7.99,unit:'lb',img:'https://images.unsplash.com/photo-1743670476802-886108356b1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8c2NvdGNoJTIwYm9ubmV0JTIwcGVwcGVyJTIwY2hpbGl8ZW58MHx8fHwxNzgyNDk3MTAwfDA&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Frozen Oxtail',cat:'Frozen Fish & Meat',origin:'Jamaica',price:11.99,unit:'lb',img:'https://plus.unsplash.com/premium_photo-1661337223133-a92f4f68d001?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8ZHJpZWQlMjBzZWVkcyUyMHNwaWNlfGVufDB8fHx8MTc4MjQ5NzEwMXww&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Hard Dough Bread',cat:'Bakery & Snacks',origin:'Jamaica',price:4.49,unit:'loaf',img:'https://plus.unsplash.com/premium_photo-1723874503208-b6adbcd4fc5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8c3BpY2UlMjBibGVuZCUyMGphcnxlbnwwfHx8fDE3ODI0OTcxMDJ8MA&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Fufu Flour',cat:'Rice & Grains',origin:'Ghana',price:5.99,unit:'pack',img:'https://plus.unsplash.com/premium_photo-1669130744503-4939a5bcef43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8Y3VycnklMjBwb3dkZXIlMjBzcGljZSUyMGJvd2x8ZW58MHx8fHwxNzgyNDk3MTA0fDA&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Red Palm Oil',cat:'Cooking Ingredients',origin:'Nigeria',price:6.99,unit:'bottle',img:'https://plus.unsplash.com/premium_photo-1674498270805-d1fbcbeef7da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8bWFja2VyZWwlMjBmaXNoJTIwcmF3fGVufDB8fHx8MTc4MjQ5NzEwNXww&ixlib=rb-4.1.0&q=80&w=400',best:true},
+  {name:'Coconut Milk',cat:'Cooking Ingredients',origin:'Thailand',price:3.99,unit:'can',img:'https://plus.unsplash.com/premium_photo-1708433275438-955c0b7815cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8dGlsYXBpYSUyMGZpc2h8ZW58MHx8fHwxNzgyNDk3MTA2fDA&ixlib=rb-4.1.0&q=80&w=400'},
+  {name:'Jasmine Rice 5lb',cat:'Rice & Grains',origin:'Thailand',price:8.99,unit:'bag',img:'https://plus.unsplash.com/premium_photo-1708433275438-955c0b7815cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8cmVkJTIwc25hcHBlciUyMGZpc2h8ZW58MHx8fHwxNzgyNDk3MTA3fDA&ixlib=rb-4.1.0&q=80&w=400'},
+  {name:'Ginger Beer',cat:'Beverages',origin:'Jamaica',price:3.49,unit:'bottle',img:'https://plus.unsplash.com/premium_photo-1668616813527-f17ca577e795?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8b3h0YWlsJTIwYmVlZnxlbnwwfHx8fDE3ODI0OTcxMDh8MA&ixlib=rb-4.1.0&q=80&w=400'},
 ];
 
 // ── CATEGORY DATA ──
@@ -405,12 +405,12 @@ const categories = [
 
 // ── DEALS (weekly flyer simulated with sale prices) ──
 const weeklyDeals = [
-  {name:'Frozen Oxtail',img:'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&q=80',sale:9.99,was:11.99,unit:'lb',tag:'SAVE $2'},
-  {name:'Fresh Yams',img:'https://images.unsplash.com/photo-1590246846892-af0b28c70ed5?w=400&q=80',sale:2.99,was:3.99,unit:'lb',tag:'SAVE $1'},
-  {name:'Scotch Bonnet Peppers',img:'https://images.unsplash.com/photo-1582916882260-1e2e7a7370c0?w=400&q=80',sale:3.99,was:4.99,unit:'pack',tag:'SAVE $1'},
-  {name:'Jerk Seasoning',img:'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=400&q=80',sale:4.99,was:6.99,unit:'jar',tag:'SAVE $2'},
-  {name:'Red Palm Oil',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80',sale:5.49,was:6.99,unit:'bottle',tag:'SAVE $1.50'},
-  {name:'Hard Dough Bread',img:'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80',sale:3.49,was:4.49,unit:'loaf',tag:'SAVE $1'},
+  {name:'Frozen Oxtail',img:'https://plus.unsplash.com/premium_photo-1668616813527-f17ca577e795?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8b3h0YWlsJTIwYmVlZnxlbnwwfHx8fDE3ODI0OTcxMDh8MA&ixlib=rb-4.1.0&q=80&w=400',sale:9.99,was:11.99,unit:'lb',tag:'SAVE $2'},
+  {name:'Fresh Yams',img:'https://plus.unsplash.com/premium_photo-1675365780148-a00379c54123?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8eWFtJTIwdHViZXIlMjB2ZWdldGFibGV8ZW58MHx8fHwxNzgyNDk3MDkzfDA&ixlib=rb-4.1.0&q=80&w=400',sale:2.99,was:3.99,unit:'lb',tag:'SAVE $1'},
+  {name:'Scotch Bonnet Peppers',img:'https://images.unsplash.com/photo-1743670476802-886108356b1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8c2NvdGNoJTIwYm9ubmV0JTIwcGVwcGVyJTIwY2hpbGl8ZW58MHx8fHwxNzgyNDk3MTAwfDA&ixlib=rb-4.1.0&q=80&w=400',sale:3.99,was:4.99,unit:'pack',tag:'SAVE $1'},
+  {name:'Jerk Seasoning',img:'https://plus.unsplash.com/premium_photo-1723874503208-b6adbcd4fc5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8c3BpY2UlMjBibGVuZCUyMGphcnxlbnwwfHx8fDE3ODI0OTcxMDJ8MA&ixlib=rb-4.1.0&q=80&w=400',sale:4.99,was:6.99,unit:'jar',tag:'SAVE $2'},
+  {name:'Red Palm Oil',img:'https://plus.unsplash.com/premium_photo-1661454224348-5ebd8dc380bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8cGFsbSUyMG9pbCUyMGJvdHRsZXxlbnwwfHx8fDE3ODI0OTcxMjB8MA&ixlib=rb-4.1.0&q=80&w=400',sale:5.49,was:6.99,unit:'bottle',tag:'SAVE $1.50'},
+  {name:'Hard Dough Bread',img:'https://plus.unsplash.com/premium_photo-1664640733898-d5c3f71f44e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MXxzZWFyY2h8MXx8YnJlYWQlMjBsb2FmfGVufDB8fHx8MTc4MjQ5NzExM3ww&ixlib=rb-4.1.0&q=80&w=400',sale:3.49,was:4.49,unit:'loaf',tag:'SAVE $1'},
 ];
 
 // ── RENDER DEALS ──
