@@ -45,8 +45,15 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 .hero-pattern{position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,var(--gold)0%,transparent 50%),radial-gradient(circle at 80% 30%,var(--green-400)0%,transparent 40%);opacity:.1}
 .hero-content{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-text .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);padding:8px 20px;border-radius:50px;color:var(--gold-light);font-size:13px;font-weight:500;margin-bottom:24px}
-.hero-badges{display:flex;gap:16px;margin-top:28px;flex-wrap:wrap}
-.hero-badges .hero-floating{position:static;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:14px 20px;animation:float 6s ease-in-out infinite}
+.hero-text .badge .dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+.hero-floating-badge{position:absolute;display:flex;align-items:center;gap:8px;border-radius:10px;padding:8px 14px;backdrop-filter:blur(16px);box-shadow:0 4px 20px rgba(0,0,0,0.25);animation:float 6s ease-in-out infinite}
+.hero-floating-badge .hfb-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.hero-floating-badge .hfb-text strong{display:block;font-size:11px;line-height:1.2}
+.hero-floating-badge .hfb-text span{font-size:9px;opacity:.8}
+.hero-floating-badge.fresh{bottom:-14px;left:-14px;background:rgba(22,122,84,0.85);border:1px solid rgba(92,211,162,0.3);color:#fff}
+.hero-floating-badge.fresh .hfb-icon{background:rgba(255,255,255,0.15)}
+.hero-floating-badge.spices{top:-14px;left:-14px;background:rgba(180,100,30,0.85);border:1px solid rgba(240,214,138,0.3);color:#fff}
+.hero-floating-badge.spices .hfb-icon{background:rgba(255,255,255,0.15)}
 .hero-text .badge .dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.2rem);color:var(--white);line-height:1.15;margin-bottom:20px}
@@ -233,6 +240,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
   .header-nav{position:fixed;top:var(--header-h);left:0;right:0;background:var(--white);flex-direction:column;padding:20px;box-shadow:var(--shadow-lg);transform:translateY(-100%);opacity:0;pointer-events:none;transition:all .3s;gap:16px}
   .header-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
   .hero{min-height:auto;padding:40px 0 60px}
+  .hero-floating-badge{display:none}
   .section{padding:60px 16px}
   .products-grid{grid-template-columns:repeat(2,1fr)}
   .categories-grid{grid-template-columns:1fr 1fr}
@@ -298,20 +306,18 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
         <a href="#products" class="btn btn-primary"><i class="fas fa-bag-shopping"></i> Shop Now</a>
         <a href="#about" class="btn btn-outline-light"><i class="fas fa-store"></i> Our Story</a>
       </div>
-      <div class="hero-badges">
-        <div class="hero-floating">
-          <div class="hero-floating-icon" style="background:var(--green-100, #e6faf1);color:var(--green-600)"><i class="fas fa-leaf"></i></div>
-          <div class="hero-floating-text"><strong>Fresh Produce</strong><span>Daily arrivals</span></div>
-        </div>
-        <div class="hero-floating">
-          <div class="hero-floating-icon" style="background:#fef3c7;color:#d97706"><i class="fas fa-pepper-hot"></i></div>
-          <div class="hero-floating-text"><strong>Authentic Spices</strong><span>From the Caribbean</span></div>
-        </div>
-      </div>
     </div>
     <div class="hero-image">
       <div class="hero-showcase">
         <img src="images/storefront.jpg" alt="Eden African & Caribbean Groceries storefront" class="hero-showcase-main">
+        <div class="hero-floating-badge fresh">
+          <div class="hfb-icon"><i class="fas fa-leaf"></i></div>
+          <div class="hfb-text"><strong>Fresh Produce</strong><span>Daily arrivals</span></div>
+        </div>
+        <div class="hero-floating-badge spices">
+          <div class="hfb-icon"><i class="fas fa-pepper-hot"></i></div>
+          <div class="hfb-text"><strong>Authentic Spices</strong><span>From the Caribbean</span></div>
+        </div>
       </div>
     </div>
   </div>
